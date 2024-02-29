@@ -6,15 +6,21 @@
  */
 
 import express from "express";
+import connectDB from "./services/database.service.js";
+import homeRoute from "./routes/home.route.js";
 
 const port = 8000;
 const app = express();
+
+// Connect to Mongo database
+connectDB();
 
 // Express built in body-parser
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Routes
+app.use("/", homeRoute);
 
 // Configure listening
 app.listen(port, () => {
