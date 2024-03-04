@@ -8,6 +8,8 @@
 import express from "express";
 import connectDB from "./services/database.service.js";
 import homeRoute from "./routes/home.route.js";
+import customerRoute from "./routes/customer.route.js";
+import restaurantRoute from "./routes/restaurant.route.js";
 
 const port = 8000;
 const app = express();
@@ -21,6 +23,8 @@ app.use(express.urlencoded({extended: false}));
 
 // Routes
 app.use("/", homeRoute);
+app.use("/customer", customerRoute);
+app.use("/restaurant", restaurantRoute);
 
 // Configure listening
 app.listen(port, () => {
