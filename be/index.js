@@ -25,6 +25,7 @@ app.use(express.urlencoded({extended: false}));
 app.use("/", homeRoute);
 app.use("/customer", customerRoute);
 app.use("/restaurant", restaurantRoute);
+app.use("/order", orderRoute);
 
 // Configure listening
 app.listen(port, () => {
