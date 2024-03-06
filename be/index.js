@@ -9,6 +9,7 @@ import express from "express";
 import connectDB from "./services/database.service.js";
 import homeRoute from "./routes/home.route.js";
 import customerRoute from "./routes/customer.route.js";
+import orderRoute from "./routes/order.route.js";
 import restaurantRoute from "./routes/restaurant.route.js";
 
 const port = 8000;

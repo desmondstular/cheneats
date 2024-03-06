@@ -9,8 +9,8 @@ import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema(
     {
         "id": {type: Number, required: true, unique: true},
-        "customer_ref": {type: mongoose.Types.ObjectId, required: true, unique: true},
-        "restaurant_ref": {type: mongoose.Types.ObjectId, required: true, unique: true},
+        "customer_ref": {type: mongoose.Types.ObjectId, ref: "customer", required: true},
+        "restaurant_ref": {type: mongoose.Types.ObjectId, ref: "restaurant", required: true},
         "items": [{
             "item_name": {type: String, required: true, unique: true},
             "price": {type: Number, min: 0, required: true},
@@ -25,6 +25,6 @@ const orderSchema = new mongoose.Schema(
     }
 );
 
-const orderModel = new mongoose.Model("Order", orderSchema);
+const orderModel = new mongoose.model("Order", orderSchema);
 
 export default orderModel;
