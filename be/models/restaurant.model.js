@@ -13,7 +13,7 @@ const RestaurantSchema = new mongoose.Schema(
         "phone": {type: String, required: true},
         "open_time": {type: String},
         "closing_time": {type: String},
-        "accepting_orders": {type: Boolean, required: true}
+        "accepting_orders": {type: Boolean}
     },
     {strictQuery: true}
 );
