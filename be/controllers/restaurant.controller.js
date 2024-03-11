@@ -18,8 +18,7 @@ export const getRestaurants = async (req, res, next) => {
 		const restaurants = await getRestaurantFromRepo();
 		res.status(200).send(restaurants);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -32,8 +31,7 @@ export const getRestaurant = async (req, res, next) => {
 		const restaurant = await getRestaurantFromRepo({id: id});
 		res.status(200).send(restaurant);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -47,8 +45,7 @@ export const updateRestaurant = async (req, res, next) => {
 		const restaurant = await updateRestaurantInRepo({id: id}, body);
 		res.status(200).send(restaurant);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -65,8 +62,7 @@ export const deleteRestaurant = async (req, res, next) => {
 			res.status(404).send();
 		}
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -80,7 +76,6 @@ export const createRestaurant = async(req, res, next) => {
 		console.log("New restaurant:\n", restaurant);
 		res.status(200).send();
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }

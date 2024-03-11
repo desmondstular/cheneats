@@ -18,8 +18,7 @@ export const getCustomers = async (req, res, next) => {
 		const customers = await getCustomerFromRepo();
 		res.status(200).send(customers);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -32,8 +31,7 @@ export const getCustomer = async (req, res, next) => {
 		const customer = await getCustomerFromRepo({id: id});
 		res.status(200).send(customer);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -47,8 +45,7 @@ export const updateCustomer = async (req, res, next) => {
 		const customer = await updateCustomerInRepo({id: id}, body);
 		res.status(200).send(customer);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -65,8 +62,7 @@ export const deleteCustomer = async (req, res, next) => {
 			res.status(404).send();
 		}
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -80,7 +76,6 @@ export const createCustomer = async(req, res, next) => {
 		console.log("New Customer:\n", customer);
 		res.status(200).send();
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }

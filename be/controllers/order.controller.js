@@ -18,8 +18,7 @@ export const getOrders = async (req, res, next) => {
         const restaurants = await getOrdersFromRepo();
         res.status(200).send(restaurants);
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
@@ -32,8 +31,7 @@ export const getOrder = async (req, res, next) => {
         const order = await getOrderFromRepo({id: id});
         res.status(200).send(order);
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
@@ -47,8 +45,7 @@ export const updateOrder = async (req, res, next) => {
         const order = await updateOrderInRepo({id: id}, body);
         res.status(200).send(order);
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
@@ -65,8 +62,7 @@ export const deleteOrder = async (req, res, next) => {
             res.status(404).send();
         }
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
@@ -80,7 +76,6 @@ export const createOrder = async(req, res, next) => {
         console.log("New order:\n", order);
         res.status(200).send();
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
