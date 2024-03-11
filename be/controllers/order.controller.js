@@ -11,7 +11,7 @@ import {
 } from "../repos/order.repo.js";
 
 /**
- * Returns a list of all restaurants in the database.
+ * Returns a list of all orders in the database.
  */
 export const getOrders = async (req, res, next) => {
     try {
@@ -23,7 +23,7 @@ export const getOrders = async (req, res, next) => {
 }
 
 /**
- * Returns a order from the database by their id.
+ * Returns an order from the database by their id.
  */
 export const getOrder = async (req, res, next) => {
     const {id} = req.params;
@@ -36,7 +36,7 @@ export const getOrder = async (req, res, next) => {
 }
 
 /**
- * Updates a order in the database by their id.
+ * Updates an order in the database by their id.
  */
 export const updateOrder = async (req, res, next) => {
     const {id} = req.params;
@@ -50,12 +50,12 @@ export const updateOrder = async (req, res, next) => {
 }
 
 /**
- * Deletes a order in the database by their id.
+ * Deletes an order in the database by their id.
  */
 export const deleteOrder = async (req, res, next) => {
     const {id} = req.params;
     try {
-        const restaurantDeleted = await deleteOrderFromRepo({id: id});
+        const orderDeleted = await deleteOrderFromRepo({id: id});
         if (orderDeleted) {
             res.status(204).send();
         } else {
@@ -67,7 +67,7 @@ export const deleteOrder = async (req, res, next) => {
 }
 
 /**
- * Creates a new restaurant in the database.
+ * Creates an order in the database.
  */
 export const createOrder = async(req, res, next) => {
     const {body} = req;

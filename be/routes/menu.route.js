@@ -5,13 +5,20 @@
  */
 
 import express from "express";
+import {
+	getMenus,
+	getMenu,
+	updateMenu,
+	deleteMenu,
+	createMenu
+} from "../controllers/menu.controller.js"
 
 const router = express.Router();
 
-router.get("/");			// Get all items
-router.get("/:id");		// Get item by id
-router.patch("/:id");		// Update item by id
-router.delete("/:id");		// Delete item by id
-router.post("/");			// Create new menu item
+router.get("/", getMenus);				// Get all items
+router.get("/:id", getMenu);			// Get item by id
+router.patch("/:id", updateMenu);		// Update item by id
+router.delete("/:id", deleteMenu);		// Delete item by id
+router.post("/", createMenu);			// Create new menu item
 
 export default router;
