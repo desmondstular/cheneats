@@ -28,7 +28,7 @@ export const getStaffs = async (req, res, next) => {
 export const getStaff = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const staff = await getStaffFromRepo({id: id});
+		const staff = await getStaffFromRepo({_id: id});
 		res.status(200).send(staff);
 	} catch (e) {
 		next(e);
@@ -42,7 +42,7 @@ export const updateStaff = async (req, res, next) => {
 	const {id} = req.params;
 	const {body} = req;
 	try {
-		const staff = await updateStaffInRepo({id: id}, body);
+		const staff = await updateStaffInRepo({_id: id}, body);
 		res.status(200).send(staff);
 	} catch (e) {
 		next(e);
@@ -55,7 +55,7 @@ export const updateStaff = async (req, res, next) => {
 export const deleteStaff = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const staffDeleted = await deleteStaffFromRepo({id: id});
+		const staffDeleted = await deleteStaffFromRepo({_id: id});
 		if (staffDeleted) {
 			res.status(204).send();
 		} else {

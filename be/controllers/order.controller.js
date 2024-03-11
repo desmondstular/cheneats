@@ -28,7 +28,7 @@ export const getOrders = async (req, res, next) => {
 export const getOrder = async (req, res, next) => {
     const {id} = req.params;
     try {
-        const order = await getOrderFromRepo({id: id});
+        const order = await getOrderFromRepo({_id: id});
         res.status(200).send(order);
     } catch (e) {
         next(e);
@@ -42,7 +42,7 @@ export const updateOrder = async (req, res, next) => {
     const {id} = req.params;
     const {body} = req;
     try {
-        const order = await updateOrderInRepo({id: id}, body);
+        const order = await updateOrderInRepo({_id: id}, body);
         res.status(200).send(order);
     } catch (e) {
         next(e);
@@ -55,7 +55,7 @@ export const updateOrder = async (req, res, next) => {
 export const deleteOrder = async (req, res, next) => {
     const {id} = req.params;
     try {
-        const orderDeleted = await deleteOrderFromRepo({id: id});
+        const orderDeleted = await deleteOrderFromRepo({_id: id});
         if (orderDeleted) {
             res.status(204).send();
         } else {

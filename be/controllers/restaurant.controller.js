@@ -28,7 +28,7 @@ export const getRestaurants = async (req, res, next) => {
 export const getRestaurant = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const restaurant = await getRestaurantFromRepo({id: id});
+		const restaurant = await getRestaurantFromRepo({_id: id});
 		res.status(200).send(restaurant);
 	} catch (e) {
 		next(e);
@@ -42,7 +42,7 @@ export const updateRestaurant = async (req, res, next) => {
 	const {id} = req.params;
 	const {body} = req;
 	try {
-		const restaurant = await updateRestaurantInRepo({id: id}, body);
+		const restaurant = await updateRestaurantInRepo({_id: id}, body);
 		res.status(200).send(restaurant);
 	} catch (e) {
 		next(e);
@@ -55,7 +55,7 @@ export const updateRestaurant = async (req, res, next) => {
 export const deleteRestaurant = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const restaurantDeleted = await deleteRestaurantFromRepo({id: id});
+		const restaurantDeleted = await deleteRestaurantFromRepo({_id: id});
 		if (restaurantDeleted) {
 			res.status(204).send();
 		} else {

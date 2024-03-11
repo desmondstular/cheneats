@@ -28,7 +28,7 @@ export const getMenus = async (req, res, next) => {
 export const getMenu = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const menu = await getMenuFromRepo({id: id});
+		const menu = await getMenuFromRepo({_id: id});
 		res.status(200).send(menu);
 	} catch (e) {
 		next(e);
@@ -42,7 +42,7 @@ export const updateMenu = async (req, res, next) => {
 	const {id} = req.params;
 	const {body} = req;
 	try {
-		const menu = await updateMenuInRepo({id: id}, body);
+		const menu = await updateMenuInRepo({_id: id}, body);
 		res.status(200).send(menu);
 	} catch (e) {
 		next(e);
@@ -55,7 +55,7 @@ export const updateMenu = async (req, res, next) => {
 export const deleteMenu = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const menuDeleted = await deleteMenuFromRepo({id: id});
+		const menuDeleted = await deleteMenuFromRepo({_id: id});
 		if (menuDeleted) {
 			res.status(204).send();
 		} else {
