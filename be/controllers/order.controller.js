@@ -11,67 +11,63 @@ import {
 } from "../repos/order.repo.js";
 
 /**
- * Returns a list of all restaurants in the database.
+ * Returns a list of all orders in the database.
  */
 export const getOrders = async (req, res, next) => {
     try {
         const restaurants = await getOrdersFromRepo();
         res.status(200).send(restaurants);
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
 /**
- * Returns a order from the database by their id.
+ * Returns an order from the database by their id.
  */
 export const getOrder = async (req, res, next) => {
     const {id} = req.params;
     try {
-        const order = await getOrderFromRepo({id: id});
+        const order = await getOrderFromRepo({_id: id});
         res.status(200).send(order);
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
 /**
- * Updates a order in the database by their id.
+ * Updates an order in the database by their id.
  */
 export const updateOrder = async (req, res, next) => {
     const {id} = req.params;
     const {body} = req;
     try {
-        const order = await updateOrderInRepo({id: id}, body);
+        const order = await updateOrderInRepo({_id: id}, body);
         res.status(200).send(order);
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
 /**
- * Deletes a order in the database by their id.
+ * Deletes an order in the database by their id.
  */
 export const deleteOrder = async (req, res, next) => {
     const {id} = req.params;
     try {
-        const restaurantDeleted = await deleteOrderFromRepo({id: id});
+        const orderDeleted = await deleteOrderFromRepo({_id: id});
         if (orderDeleted) {
             res.status(204).send();
         } else {
             res.status(404).send();
         }
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }
 
 /**
- * Creates a new restaurant in the database.
+ * Creates an order in the database.
  */
 export const createOrder = async(req, res, next) => {
     const {body} = req;
@@ -80,7 +76,6 @@ export const createOrder = async(req, res, next) => {
         console.log("New order:\n", order);
         res.status(200).send();
     } catch (e) {
-        next();
-        res.status(500).send(e.message);
+        next(e);
     }
 }

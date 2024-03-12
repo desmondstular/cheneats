@@ -5,7 +5,7 @@
  * database.
  */
 
-import order from "../models/order.model.js";
+import Order from "../models/order.model.js";
 
 /**
  * Gets one or more orders from the database.
