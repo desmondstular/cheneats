@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import 'bootstrap/dist//css/bootstrap.min.css'
+import CustomerHome from './routes/customer/home.customer.route.jsx'
+import CustomerOrder from './routes/customer/order.customer.route.jsx'
+import EmployeeAnalytics from './routes/employee/analytics.employee.route.jsx'
+import EmployeeHome from './routes/employee/home.employee.route.jsx'
+import EmployeeEditMenu from './routes/employee/editmenu.employee.route.jsx'
+import EmployeeOrderHistory from './routes/employee/home.employee.route.jsx'
+
 
 function App() {
+  const [count, setCount] = useState(0)
+
+  // Define the front end routing
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <div className="App">
+        <div className="vh-100 bg-primary">
+          <Routes>
+            <Route path='/customerHome' element={<CustomerHome />}/>
+            <Route path='/customerOrder' element={<CustomerOrder />}/>
+            <Route path='/employeeAnalytics' element={<EmployeeAnalytics />}/>
+            <Route path='/employeeHome' element={<EmployeeHome />}/>
+            <Route path='/employeeEditMenu' element={<EmployeeEditMenu />}/>
+            <Route path='/employeeOrderHistory' element={<EmployeeOrderHistory />}/>
+
+            {/* Example on setting up route to handle data passing */}
+            {/* <Route path='/storeOrder/:restaurantId/:customerId' element={<StoreOrder />} /> */}
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
