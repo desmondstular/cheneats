@@ -2,13 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist//css/bootstrap.min.css'
+import Login from './routes/login.route.jsx'
 import CustomerHome from './routes/customer/home.customer.route.jsx'
 import CustomerOrder from './routes/customer/order.customer.route.jsx'
 import EmployeeAnalytics from './routes/employee/analytics.employee.route.jsx'
 import EmployeeHome from './routes/employee/home.employee.route.jsx'
 import EmployeeEditMenu from './routes/employee/editmenu.employee.route.jsx'
 import EmployeeOrderHistory from './routes/employee/home.employee.route.jsx'
-
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +19,7 @@ function App() {
       <div className="App">
         <div className="vh-100 bg-primary">
           <Routes>
+            <Route path='/' element={<Login />}/>
             <Route path='/customerHome' element={<CustomerHome />}/>
             <Route path='/customerOrder' element={<CustomerOrder />}/>
             <Route path='/employeeAnalytics' element={<EmployeeAnalytics />}/>
