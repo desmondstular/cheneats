@@ -8,7 +8,7 @@ import CustomerOrder from './routes/customer/order.customer.route.jsx'
 import EmployeeAnalytics from './routes/employee/analytics.employee.route.jsx'
 import EmployeeHome from './routes/employee/home.employee.route.jsx'
 import EmployeeEditMenu from './routes/employee/editmenu.employee.route.jsx'
-import EmployeeOrderHistory from './routes/employee/home.employee.route.jsx'
+import EmployeeOrderHistory from './routes/employee/orderhistory.employee.route.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
