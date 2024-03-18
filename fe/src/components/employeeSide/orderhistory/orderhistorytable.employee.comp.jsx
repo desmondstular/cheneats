@@ -1,10 +1,9 @@
 /**
  * orderhistorytable.employee.comp.jsx
  */
+import {orderSort, statusSortBy} from "./orderhistoryhelpers.employee.js";
 
 export const EmployeeOrderHistoryTable = ({orders, customers}) => {
-	const sortBy = ["ordered", "in-progress", "awaiting-pickup", "completed"];
-
 	// Join orders and customers by ref, attach customer name to order
 	orders.forEach((order) => {
 		const { name, email } = customers.find(({_id}) => _id === order.customer_ref);
@@ -12,21 +11,10 @@ export const EmployeeOrderHistoryTable = ({orders, customers}) => {
 		order["customer_email"] = email;
 	});
 
-	const customSort = ({ data, sortBy, sortField }) => {
-		const sortByObject = sortBy.reduce((obj, item, index) => {
-			return {
-				...obj,
-				[item]: index
-			};
-		}, {});
-		return data.sort(
-			(a, b) => sortByObject[a[sortField]] - sortByObject[b[sortField]]
-		);
-	};
-
-	customSort({
+	// Sorts orders by status, shows active at top
+	orderSort({
 		data: orders,
-		sortBy: [...sortBy, "other"],
+		sortBy: [...statusSortBy, "other"],
 		sortField: "status"
 	});
 
@@ -90,14 +78,29 @@ export const EmployeeOrderHistoryTable = ({orders, customers}) => {
 													</tr>
 												))}
 											</tbody>
+											<tfoot>
+												<tr className='outline outline-1 outline-blue-500 text-sm'>
+													<td></td>
+													<td>Total:</td>
+													<td>${order.total}</td>
+												</tr>
+											</tfoot>
 										</table>
 									</div>
-									<p className="py-4">Press ESC key or click the button below to close</p>
-									<div className="modal-action">
-										<form method="dialog">
-											{/* if there is a button in form, it will close the modal */}
-											<button className="btn btn-success">Close</button>
-										</form>
+									<div>
+										<p>Customer: {order.customer_name} ({order.customer_email})</p>
+										<p>Pickup Time: {order.pickup_time}</p>
+										<p>Status: {order.status}</p>
+										<p>Fulfilled by: {order.staff_ref}</p>
+									</div>
+									<div className="flex gap-10 grow">
+										<p className="py-4">Press ESC key or click the button below to close</p>
+										<div className="modal-action">
+											<form method="dialog">
+												{/* if there is a button in form, it will close the modal */}
+												<button className="btn btn-success">Close</button>
+											</form>
+										</div>
 									</div>
 								</div>
 							</dialog>
