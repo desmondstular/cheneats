@@ -3,7 +3,6 @@
  */
 
 import EmployeeOrderHistoryTable from "../../components/employeeSide/orderhistory/orderhistorytable.employee.comp.jsx";
-import axios from "axios";
 
 const EmployeeOrderHistory = () => {
 	const customers = [
@@ -99,7 +98,6 @@ const EmployeeOrderHistory = () => {
 			<EmployeeOrderHistoryTable
 				orders={orders}
 				customers={customers}
-				restaurants={restaurants}
 				menu={menu}
 			/>
 		</div>

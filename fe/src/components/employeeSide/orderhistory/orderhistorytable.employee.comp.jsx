@@ -1,11 +1,9 @@
 /**
  * orderhistorytable.employee.comp.jsx
  */
-import axios from "axios";
 
-export const EmployeeOrderHistoryTable = ({orders, customers, restaurant}) => {
+export const EmployeeOrderHistoryTable = ({orders, customers}) => {
 	const sortBy = ["ordered", "in-progress", "awaiting-pickup", "completed"];
-	let i = 0;
 
 	// Join orders and customers by ref, attach customer name to order
 	orders.forEach((order) => {
