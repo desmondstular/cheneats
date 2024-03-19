@@ -7,7 +7,8 @@ import {
 	createMenuInRepo,
 	deleteMenuFromRepo,
 	getMenuFromRepo,
-	updateMenuInRepo
+	updateMenuInRepo,
+	getMenuByRestaurantFromRepo
 } from "../repos/menu.repo.js";
 
 /**
@@ -33,6 +34,19 @@ export const getMenu = async (req, res, next) => {
 	} catch (e) {
 		next(e);
 	}
+}
+
+/**
+ * Returns menu items from the database for a specific restaurant.
+ */
+export const getMenuByRestaurant = async (req, res, next) => {
+    const { restaurantId } = req.params;
+    try {
+        const menus = await getMenuByRestaurantFromRepo(restaurantId);
+        res.status(200).send(menus);
+    } catch (e) {
+        next(e);
+    }
 }
 
 /**
