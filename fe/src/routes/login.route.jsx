@@ -8,7 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 function Login () {
 
     return (
-        <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
+        <div className="d-flex vh-100 justify-content-center align-items-center">
             <div className="w-60 bg-white rounded p-3">
                 <div className="btn-group">
                     <Link to="/customerHome" className='btn btn-secondary rounded-end'> Customer Homepage</Link>
