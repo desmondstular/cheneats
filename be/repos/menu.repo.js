@@ -18,6 +18,18 @@ export const getMenuFromRepo = async (query) => {
 }
 
 /**
+ * Gets menu items from the database for a specific restaurant.
+ */
+export const getMenuByRestaurantFromRepo = async (restaurantId) => {
+    try {
+        return await Menu.find({ restaurant_ref: restaurantId });
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}
+
+/**
  * Updates an existing menu item in the database.
  */
 export const updateMenuInRepo = async (query, update) => {

@@ -24,7 +24,7 @@ function App() {
             <Route path='/customerOrder' element={<CustomerOrder />}/>
             <Route path='/employeeAnalytics' element={<EmployeeAnalytics />}/>
             <Route path='/employeeHome' element={<EmployeeHome />}/>
-            <Route path='/employeeEditMenu' element={<EmployeeEditMenu />}/>
+            <Route path='/employeeEditMenu/:restaurantId' element={<EmployeeEditMenu />}/>
             <Route path='/employeeOrderHistory' element={<EmployeeOrderHistory />}/>
 
             {/* Example on setting up route to handle data passing */}
