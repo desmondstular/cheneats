@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 export const RestaurantcardCustomerComp = ({restaurant, activeCustomer}) => {
     return (
-        <Link to={`/customerOrder/${restaurant._id}/${activeCustomer._id}`}>
+        <Link to={`/customerOrder/${restaurant._id}/${activeCustomer}`} style={{ textDecoration: 'none' }}>
         <Card
         style={{maxWidth:400, maxHeight: 400, width: 'auto', height: 'auto', margin: '4px'}}>
             <CardHeader
