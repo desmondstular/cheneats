@@ -1,0 +1,87 @@
+[{
+  "_id": {
+    "$oid": "65f92b69e75ba890992108a1"
+  },
+  "customer_ref": "65f91081e75ba89099210853",
+  "restaurant_ref": "65f90b3ae75ba89099210809",
+  "staff_ref": "65f911e0e75ba8909921085f",
+  "pickup_time": "2000",
+  "items": [
+    {
+      "menu_ref": "65f90b3ae75ba89099210807",
+      "quantity": "1",
+      "subtotal": "14.49"
+    }
+  ],
+  "total": "14.49",
+  "status": "completed"
+},
+{
+  "_id": {
+    "$oid": "65f92b69e75ba890992108a2"
+  },
+  "customer_ref": "65f91081e75ba89099210852",
+  "restaurant_ref": "65f908e8e75ba89099210778",
+  "staff_ref": "65f911e0e75ba8909921085d",
+  "pickup_time": "1700",
+  "items": [
+    {
+      "menu_ref": "65f90b3ae75ba890992107e5",
+      "quantity": "2",
+      "subtotal": "12.99"
+    }
+  ],
+  "total": "25.98",
+  "status": "ordered"
+},
+{
+  "_id": {
+    "$oid": "65f92b69e75ba890992108a3"
+  },
+  "customer_ref": "65f91081e75ba89099210852",
+  "restaurant_ref": "65f90a63e75ba89099210798",
+  "staff_ref": "65f911e0e75ba8909921085e",
+  "pickup_time": "1400",
+  "items": [
+    {
+      "menu_ref": "65f90b3ae75ba89099210828",
+      "quantity": "5",
+      "subtotal": "14.99"
+    },
+    {
+      "menu_ref": "65f90b3ae75ba89099210829",
+      "quantity": "2",
+      "subtotal": "14.99"
+    }
+  ],
+  "total": "104.93",
+  "status": "awaiting-pickup"
+},
+{
+  "_id": {
+    "$oid": "65f92b69e75ba890992108a4"
+  },
+  "customer_ref": "65f91081e75ba89099210852",
+  "restaurant_ref": "65f908e8e75ba89099210778",
+  "staff_ref": "65f911e0e75ba8909921085d",
+  "pickup_time": "2100",
+  "items": [
+    {
+      "menu_ref": "65f90b3ae75ba890992107e5",
+      "quantity": "3",
+      "subtotal": "12.99"
+    },
+    {
+      "menu_ref": "65f90b3ae75ba890992107f8",
+      "quantity": "6",
+      "subtotal": "10.99"
+    },
+    {
+      "menu_ref": "65f90b3ae75ba890992107f6",
+      "quantity": "4",
+      "subtotal": "11.49"
+    }
+  ],
+  "total": "150.87",
+  "status": "in-progress"
+}]

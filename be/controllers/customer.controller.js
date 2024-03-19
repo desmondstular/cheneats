@@ -18,8 +18,7 @@ export const getCustomers = async (req, res, next) => {
 		const customers = await getCustomerFromRepo();
 		res.status(200).send(customers);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -29,11 +28,10 @@ export const getCustomers = async (req, res, next) => {
 export const getCustomer = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const customer = await getCustomerFromRepo({id: id});
+		const customer = await getCustomerFromRepo({_id: id});
 		res.status(200).send(customer);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -44,11 +42,10 @@ export const updateCustomer = async (req, res, next) => {
 	const {id} = req.params;
 	const {body} = req;
 	try {
-		const customer = await updateCustomerInRepo({id: id}, body);
+		const customer = await updateCustomerInRepo({_id: id}, body);
 		res.status(200).send(customer);
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -58,15 +55,14 @@ export const updateCustomer = async (req, res, next) => {
 export const deleteCustomer = async (req, res, next) => {
 	const {id} = req.params;
 	try {
-		const customerDeleted = await deleteCustomerFromRepo({id: id});
+		const customerDeleted = await deleteCustomerFromRepo({_id: id});
 		if (customerDeleted) {
 			res.status(204).send();
 		} else {
 			res.status(404).send();
 		}
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }
 
@@ -80,7 +76,6 @@ export const createCustomer = async(req, res, next) => {
 		console.log("New Customer:\n", customer);
 		res.status(200).send();
 	} catch (e) {
-		next();
-		res.status(500).send(e.message);
+		next(e);
 	}
 }

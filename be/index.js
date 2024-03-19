@@ -5,14 +5,18 @@
  * to a MongoDB database.
  */
 
+import cors from 'cors';
 import express from "express";
 import connectDB from "./services/database.service.js";
 import homeRoute from "./routes/home.route.js";
 import customerRoute from "./routes/customer.route.js";
+import orderRoute from "./routes/order.route.js";
 import restaurantRoute from "./routes/restaurant.route.js";
+import menuRoute from "./routes/menu.route.js";
 
 const port = 8000;
 const app = express();
+app.use(cors())
 
 // Connect to Mongo database
 connectDB();
@@ -25,6 +29,8 @@ app.use(express.urlencoded({extended: false}));
 app.use("/", homeRoute);
 app.use("/customer", customerRoute);
 app.use("/restaurant", restaurantRoute);
+app.use("/order", orderRoute);
+app.use("/menu", menuRoute)
 
 // Configure listening
 app.listen(port, () => {
