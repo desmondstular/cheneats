@@ -9,7 +9,7 @@ export const RestaurantcardCustomerComp = ({restaurant, activeCustomer}) => {
     return (
         <Link to={`/customerOrder/${restaurant._id}/${activeCustomer}`} style={{ textDecoration: 'none' }}>
         <Card
-        style={{maxWidth:400, maxHeight: 400, width: 'auto', height: 'auto', margin: '4px'}}>
+        style={{maxWidth:400, maxHeight: 400, width: 'auto', height: 'auto', margin: '8px 4px'}}>
             <CardHeader
                 title={restaurant.name}
             />
