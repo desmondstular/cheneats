@@ -36,18 +36,9 @@ export const EmployeeOrderHistoryTable = ({orders, customers}) => {
 							<span className={order.status === "completed" ? "badge badge-md badge-accent hover:badge-success" : " badge badge-md badge-error" }>{order.status}</span>
 						</td>
 						<td>
-							<div className="flex items-center gap-3">
-								{/*<div className="avatar">*/}
-								{/*	/!*<div>*!/*/}
-								{/*		/!*<img className='h-auto max-w-24 rounded-full object-cover object-center'*!/*/}
-								{/*		/!*	 src="../../../../public/guy-holding-food.png"*!/*/}
-								{/*		/!*	 alt="Avatar Tailwind CSS Component"/>*!/*/}
-								{/*	/!*</div>*!/*/}
-								{/*</div>*/}
-								<div>
-									<div className="font-bold">{order.customer_email}</div>
-									<div className="text-sm opacity-50">{order.customer_name}</div>
-								</div>
+							<div>
+								<div className="font-bold">{order.customer_email}</div>
+								<div className="text-sm opacity-50">{order.customer_name}</div>
 							</div>
 						</td>
 						<td>
