@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <div className="h-dvh overflow-hidden bg-blue-300">
+        <div className="h-dvh overflow-hidden vh-100">
           <Routes>
             <Route path='/' element={<Login />}/>
             <Route path='/customerHome/:customerId' element={<CustomerHome />}/>
