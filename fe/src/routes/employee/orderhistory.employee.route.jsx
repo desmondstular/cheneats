@@ -7,7 +7,6 @@
 import EmployeeOrderHistoryTable from "../../components/employeeSide/orderhistory/orderhistorytable.employee.comp.jsx";
 import CustomerNavBar from "../../components/customerSide/navbar.customer.comp.jsx";
 import {useContext, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../../.store/ThemeContext.jsx";
 

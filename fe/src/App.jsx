@@ -13,8 +13,6 @@ import CustomerOrderHistory from './routes/customer/orderhistory.customer.route.
 import {ThemeProvider} from ".store/ThemeContext.jsx";
 
 function App() {
-	const [count, setCount] = useState(0)
-
 	// Define the front end routing
 	return (
 		<BrowserRouter>
