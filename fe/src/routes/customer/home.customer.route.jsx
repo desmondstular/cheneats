@@ -1,26 +1,32 @@
-import React, {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import {RestaurantcardlistCustomerComp} from '../../components/customerSide/restaurantView/restaurantcardlist.customer.comp';
-import {useParams, Link} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import CustomerNavBar from "../../components/customerSide/navbar.customer.comp.jsx";
+import {ThemeContext} from "../../.store/ThemeContext.jsx";
+import Cookies from "js-cookie";
 
 function CustomerHome() {
     const [restaurants, setRestaurants] = useState([]);
-    const {customerId} = useParams();
+	const {customerID} = useContext(ThemeContext);
+
+	// If cookie for customerID returns undefined, route to login
+	if (Cookies.get('customerID') === undefined) {
+		const navigate = useNavigate();
+		navigate('/', {replace: true});
+	}
 
     useEffect( () => {
         axios.get(`http://localhost:8000/restaurant`)
             .then(result => setRestaurants(result.data))
             .catch(err => console.log(err))
+    }, []);
 
-    }, [])
-    console.log(restaurants);
-    console.log(customerId);
     return (
         <div>
             <CustomerNavBar></CustomerNavBar>
             {/*<text style={{style: 'flex', size: '24px', font: "bold" }}>Choose a Restaurant</text>*/}
-            <RestaurantcardlistCustomerComp restaurants={restaurants} activeCustomer={customerId}/>
+            <RestaurantcardlistCustomerComp restaurants={restaurants} activeCustomer={customerID}/>
         </div>
     );
 }
