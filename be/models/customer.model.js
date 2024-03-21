@@ -10,7 +10,7 @@ const CustomerSchema = new mongoose.Schema(
     {
         "email": {type: String, required: true, unique: true},
         "name": {type: String, required: true},
-        "phone": {type: Number}
+        "phone": {type: String}
     },
     {strictQuery: true}
 );
