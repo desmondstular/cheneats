@@ -20,12 +20,12 @@ function EmployeeEditMenu () {
     console.log(menuItems);
 
     return (
-        <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-            <div className="w-60 bg-white rounded p-3">
-                <div className="btn-group">
+        <div className="d-flex vh-100 justify-content-center align-items-center">
+            <div className="w-2/4 bg-white rounded p-3">
+                <div className="btn-group pb-2">
                     <Link to="/createMenuItem" className='btn btn-secondary rounded-end'> Add a Menu Item +</Link>
                 </div>
-            <TableContainer sx={{ maxHeight: 600, width: 800 }} component={Paper}>
+            <TableContainer sx={{ maxHeight: 600, maxWidth : 1200, width : 'auto', height : 'auto', margin :'auto' }} component={Paper}>
                 <table className="table">
                     <thead>
                         <tr>
@@ -40,7 +40,7 @@ function EmployeeEditMenu () {
                     <tbody>
                         {menuItems.map((menuItem) => (
                             <tr key={menuItem._id}>
-                                <td><img src={menuItem.image} alt={menuItem.name} style={{maxHeight: 100, maxWidth : 150, width : 'auto', height : 'auto', margin :'auto'}} /></td>
+                                <td><img src={menuItem.image} alt={menuItem.name} style={{maxHeight: 120, maxWidth : 80, width : 'auto', height : 'auto', margin :'auto'}} /></td>
                                 <td>{menuItem.name}</td>
                                 <td>${menuItem.price}</td>
                                 <td>{menuItem.available ? 'Yes' : 'No'}</td>

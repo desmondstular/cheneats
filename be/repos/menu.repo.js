@@ -24,11 +24,9 @@ export const getMenuFromRepo = async (query) => {
  */
 export const getMenuByRestaurantFromRepo = async (restaurantId) => {
     try {
-        console.log(restaurantId);
         return await Menu.find({ restaurant_ref: restaurantId }).exec();
-    } catch (error) {
-        console.error(error);
-        throw error;
+    } catch (e) {
+        throw e;
     }
 };
 
