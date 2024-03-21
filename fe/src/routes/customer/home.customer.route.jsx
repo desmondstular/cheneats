@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {RestaurantcardCustomerComp} from '../../components/customerSide/restaurantView/restaurantcard.customer.comp';
 import {RestaurantcardlistCustomerComp} from '../../components/customerSide/restaurantView/restaurantcardlist.customer.comp';
-import {CustomerHeaderComp} from '../../components/customerSide/restaurantView/customer.header.comp';
 import {useParams, Link} from "react-router-dom";
 import axios from "axios";
+import CustomerNavBar from "../../components/customerSide/navbar.customer.comp.jsx";
+
 function CustomerHome() {
     const [restaurants, setRestaurants] = useState([]);
     const {customerId} = useParams();
@@ -18,7 +18,7 @@ function CustomerHome() {
     console.log(customerId);
     return (
         <div>
-            <CustomerHeaderComp></CustomerHeaderComp>
+            <CustomerNavBar></CustomerNavBar>
             {/*<text style={{style: 'flex', size: '24px', font: "bold" }}>Choose a Restaurant</text>*/}
             <RestaurantcardlistCustomerComp restaurants={restaurants} activeCustomer={customerId}/>
         </div>

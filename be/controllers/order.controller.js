@@ -15,7 +15,7 @@ import {
  */
 export const getOrders = async (req, res, next) => {
     try {
-        const restaurants = await getOrdersFromRepo();
+        const restaurants = await getOrderFromRepo();
         res.status(200).send(restaurants);
     } catch (e) {
         next(e);
