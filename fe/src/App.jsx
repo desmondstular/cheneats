@@ -26,7 +26,7 @@ function App() {
 						<Route path='/customerOrderHistory' element={<CustomerOrderHistory/>}/>
 
 						<Route path='/employeeHome' element={<EmployeeHome/>}/>
-						<Route path='/employeeEditMenu/:restaurantId' element={<EmployeeEditMenu/>}/>
+						<Route path='/employeeEditMenu' element={<EmployeeEditMenu/>}/>
 						<Route path='/employeeOrderHistory' element={<EmployeeOrderHistory/>}/>
 						<Route path='/employeeAnalytics' element={<EmployeeAnalytics/>}/>
 

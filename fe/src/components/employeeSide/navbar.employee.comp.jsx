@@ -27,7 +27,7 @@ const EmployeeNavBar = () => {
 				<div className='flex-1'>
 					<div className='flex justify-center gap-2'>
 						<Link to='/employeeHome' className="btn btn-ghost text-md">Home</Link>
-						<Link to={`/employeeEditMenu/${restaurantID}`} className="btn btn-ghost text-md">Menu</Link>
+						<Link to='/employeeEditMenu/' className="btn btn-ghost text-md">Menu</Link>
 						<Link to='/employeeOrderHistory' className="btn btn-ghost text-md">Order History</Link>
 						<Link to='/employeeAnalytics' className="btn btn-ghost text-md">Analytics</Link>
 					</div>
