@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import EmployeeNavBar from "../../components/employeeSide/navbar.employee.comp.jsx";
 
 function EmployeeEditMenu() {
-	const {restaurantID, setRestaurantID, employeeID} = useContext(ThemeContext);
+	const {restaurantID} = useContext(ThemeContext);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -40,11 +40,14 @@ function EmployeeEditMenu() {
         image : "",
         on_special: false
     });
-
+    
     useEffect(() => {
-        axios.get(`http://localhost:8000/menu/restaurant/${restaurantID}`)
-            .then(result => setMenuItems(result.data))
-            .catch(err => console.error(err));
+        const delay = setTimeout(() => {
+            axios.get(`http://localhost:8000/menu/restaurant/${restaurantID}`)
+                .then(result => setMenuItems(result.data))
+                .catch(err => console.error(err));
+        }, 50);
+        return () => clearTimeout(delay);
     }, [restaurantID]);
 
     const openEditModal = (menuItem) => {
