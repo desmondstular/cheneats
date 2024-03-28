@@ -14,24 +14,31 @@ export const ThemeProvider = ({ children }) => {
 	const [restaurantID, setRestaurantID] = useState("");
 	const [employeeID, setEmployeeID] = useState("");
 
+
 	useEffect(() => {
 		const customerCookie = Cookies.get('customerID');
 		const restaurantCookie = Cookies.get('restaurantID');
 		const employeeCookie = Cookies.get('employeeID');
 
-		// If customer cookie exists, set customerID
-		if (customerCookie !== undefined) {
-			setCustomerID(customerCookie);
+		if (restaurantID === '') {
+			const restaurantCookie = Cookies.get('restaurantID');
+			if (restaurantCookie !== undefined) {
+				setRestaurantID(restaurantCookie);
+			}
 		}
 
-		// If restaurant cookie exists, set restaurantID
-		if (restaurantCookie !== undefined) {
-			setRestaurantID(customerCookie);
+		if (employeeID === '') {
+			const employeeCookie = Cookies.get('employeeID');
+			if (employeeCookie !== undefined) {
+				setEmployeeID(employeeCookie);
+			}
 		}
 
-		// If employee cookie exists, set employeeID
-		if (employeeCookie !== undefined) {
-			setEmployeeID(employeeCookie);
+		if (customerID === '') {
+			const customerCookie = Cookies.get('customerID');
+			if (customerCookie !== undefined) {
+				setCustomerID(customerCookie);
+			}
 		}
 	});
 
