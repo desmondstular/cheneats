@@ -22,7 +22,7 @@ function App() {
 				<div className="vh-100">
 					<Routes>
 						<Route path='/' element={<Login/>}/>
-						<Route path='/customerHome/:customerId' element={<CustomerHome/>}/>
+						<Route path='/customerHome/' element={<CustomerHome/>}/>
 						<Route path='/customerOrder/:restaurantId/:customerId' element={<CustomerOrder/>}/>
 						<Route path='/customerOrderHistory/:customerId' element={<CustomerOrderHistory/>}/>
 						<Route path='/employeeAnalytics/:restaurantId' element={<EmployeeAnalytics/>}/>

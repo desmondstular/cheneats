@@ -9,12 +9,14 @@ import Cookies from "js-cookie";
 function CustomerHome() {
     const [restaurants, setRestaurants] = useState([]);
 	const {customerID} = useContext(ThemeContext);
+	const navigate = useNavigate();
 
-	// If cookie for customerID returns undefined, route to login
-	if (Cookies.get('customerID') === undefined) {
-		const navigate = useNavigate();
-		navigate('/', {replace: true});
-	}
+	useEffect(() => {
+		// If cookie for customerID returns undefined, route to login
+		if (Cookies.get('customerID') === undefined) {
+			navigate('/', {replace: true});
+		}
+	}, []);
 
     useEffect( () => {
         axios.get(`http://localhost:8000/restaurant`)
