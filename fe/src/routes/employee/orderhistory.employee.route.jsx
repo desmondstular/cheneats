@@ -10,12 +10,13 @@ import {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../../.store/ThemeContext.jsx";
+import EmployeeNavBar from "../../components/employeeSide/navbar.employee.comp.jsx";
 
 const EmployeeOrderHistory = () => {
 	const [orders, setOrders] = useState([]);
 	const [customers, setCustomers] = useState([]);
 	const [menu, setMenu] = useState([]);
-	const {staffID, restaurantID, setRestaurantID} = useContext(ThemeContext);
+	const {staffID, restaurantID} = useContext(ThemeContext);
 
 
 	useEffect(() => {
@@ -51,7 +52,7 @@ const EmployeeOrderHistory = () => {
 
 	return (
 		<div>
-			<CustomerNavBar/>
+			<EmployeeNavBar/>
 			<br/>
 			<p className="text-lg text-gray-900 dark:text-black">Order History</p>
 			<EmployeeOrderHistoryTable

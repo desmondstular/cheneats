@@ -10,12 +10,11 @@ import EmployeeHome from './routes/employee/home.employee.route.jsx'
 import EmployeeEditMenu from './routes/employee/editmenu.employee.route.jsx'
 import EmployeeOrderHistory from './routes/employee/orderhistory.employee.route.jsx'
 import CustomerOrderHistory from './routes/customer/orderhistory.customer.route.jsx'
-import {ThemeContext} from ".store/ThemeContext.jsx";
 
 function App() {
-	const [count, setCount] = useState(0)
-
 	// Define the front end routing
+	// Reference CustomerHome or EmployeeHome to view context and
+	// and cookie usage.
 	return (
 		<BrowserRouter>
 			<div className="App">
@@ -24,11 +23,12 @@ function App() {
 						<Route path='/' element={<Login/>}/>
 						<Route path='/customerHome/' element={<CustomerHome/>}/>
 						<Route path='/customerOrder/:restaurantId/:customerId' element={<CustomerOrder/>}/>
-						<Route path='/customerOrderHistory/:customerId' element={<CustomerOrderHistory/>}/>
-						<Route path='/employeeAnalytics/:restaurantId' element={<EmployeeAnalytics/>}/>
+						<Route path='/customerOrderHistory' element={<CustomerOrderHistory/>}/>
+
 						<Route path='/employeeHome' element={<EmployeeHome/>}/>
 						<Route path='/employeeEditMenu/:restaurantId' element={<EmployeeEditMenu/>}/>
 						<Route path='/employeeOrderHistory' element={<EmployeeOrderHistory/>}/>
+						<Route path='/employeeAnalytics' element={<EmployeeAnalytics/>}/>
 
 						{/* Example on setting up route to handle data passing */}
 						{/* <Route path='/storeOrder/:restaurantId/:customerId' element={<StoreOrder />} /> */}
