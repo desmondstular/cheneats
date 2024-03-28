@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import {useContext, useState} from 'react'
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import 'bootstrap/dist//css/bootstrap.min.css'
 import Login from './routes/login.route.jsx'
 import CustomerHome from './routes/customer/home.customer.route.jsx'
@@ -12,30 +12,31 @@ import EmployeeOrderHistory from './routes/employee/orderhistory.employee.route.
 import CustomerOrderHistory from './routes/customer/orderhistory.customer.route.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+	// Define the front end routing
+	// Reference CustomerHome or EmployeeHome to view context and
+	// and cookie usage.
+	return (
+		<BrowserRouter>
+			<div className="App">
+				<div className="vh-100">
+					<Routes>
+						<Route path='/' element={<Login/>}/>
+						<Route path='/customerHome/' element={<CustomerHome/>}/>
+						<Route path='/customerOrder/:restaurantId/:customerId' element={<CustomerOrder/>}/>
+						<Route path='/customerOrderHistory' element={<CustomerOrderHistory/>}/>
 
-  // Define the front end routing
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <div className="h-dvh overflow-hidden vh-100">
-          <Routes>
-            <Route path='/' element={<Login />}/>
-            <Route path='/customerHome/:customerId' element={<CustomerHome />}/>
-            <Route path='/customerOrder/:restaurantId/:customerId' element={<CustomerOrder />}/>
-            <Route path='/customerOrderHistory/:customerId' element={<CustomerOrderHistory />}/>
-            <Route path='/employeeAnalytics/:restaurantId' element={<EmployeeAnalytics />}/>
-            <Route path='/employeeHome/:restaurantId' element={<EmployeeHome />}/>
-            <Route path='/employeeEditMenu/:restaurantId' element={<EmployeeEditMenu />}/>
-            <Route path='/employeeOrderHistory/:restaurantId' element={<EmployeeOrderHistory />}/>
+						<Route path='/employeeHome' element={<EmployeeHome/>}/>
+						<Route path='/employeeEditMenu/:restaurantId' element={<EmployeeEditMenu/>}/>
+						<Route path='/employeeOrderHistory' element={<EmployeeOrderHistory/>}/>
+						<Route path='/employeeAnalytics' element={<EmployeeAnalytics/>}/>
 
-            {/* Example on setting up route to handle data passing */}
-            {/* <Route path='/storeOrder/:restaurantId/:customerId' element={<StoreOrder />} /> */}
-          </Routes>
-        </div>
-      </div>
-    </BrowserRouter>
-  )
+						{/* Example on setting up route to handle data passing */}
+						{/* <Route path='/storeOrder/:restaurantId/:customerId' element={<StoreOrder />} /> */}
+					</Routes>
+				</div>
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App
