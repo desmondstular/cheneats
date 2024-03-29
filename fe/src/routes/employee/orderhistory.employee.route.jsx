@@ -5,31 +5,28 @@
  */
 
 import EmployeeOrderHistoryTable from "../../components/employeeSide/orderhistory/orderhistorytable.employee.comp.jsx";
-import CustomerNavBar from "../../components/customerSide/navbar.customer.comp.jsx";
 import {useContext, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../../.store/ThemeContext.jsx";
 import EmployeeNavBar from "../../components/employeeSide/navbar.employee.comp.jsx";
 
 const EmployeeOrderHistory = () => {
 	const [orders, setOrders] = useState([]);
-	const {staffID, restaurantID} = useContext(ThemeContext);
+	const {restaurantID} = useContext(ThemeContext);
 	const orderURL = 'http://localhost:8000/order/byrestaurant/' + restaurantID;
 
 	useEffect(() => {
 		if (restaurantID !== '') {
-			axios.get('http://localhost:8000/order/byrestaurant/' + restaurantID)
+			axios.get(orderURL)
 				.then(result => setOrders(result.data))
 				.catch(err => console.log(err));
 		}
 	}, [restaurantID]);
 
 	return (
-		<div>
+		<div className='flex flex-col gap-3'>
 			<EmployeeNavBar/>
-			<br/>
-			<p className="text-lg text-gray-900 dark:text-black">Order History</p>
+			<p className="text-3xl font-semibold tracking-wide">Order History</p>
 			<EmployeeOrderHistoryTable
 				orders={orders}
 			/>
