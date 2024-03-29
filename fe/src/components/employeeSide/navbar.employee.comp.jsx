@@ -1,6 +1,4 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useContext} from "react";
-import {ThemeContext} from "../../.store/ThemeContext.jsx";
 import Cookies from "js-cookie";
 
 const EmployeeNavBar = () => {
