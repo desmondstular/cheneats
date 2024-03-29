@@ -11,6 +11,8 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 		sortField: "status"
 	});
 
+	console.log(orders);
+
 	return (
 		<div className="overflow-x-auto rounded-box p-4">
 			<table className="table">
@@ -26,56 +28,60 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 				{orders.map(order => (
 					<tr>
 						<td>
-							<span className={order.status === "completed" ? "badge badge-md badge-accent hover:badge-success" : " badge badge-md badge-error" }>{order.status}</span>
+							<span
+								className={order.status === "completed" ? "badge badge-md badge-accent hover:badge-success w-24" : "w-24 badge badge-md badge-error"}>{order.status}</span>
 						</td>
 						<td>
 							<div>
-								<div className="font-bold">{order.customer_ref}</div>
-								<div className="text-sm opacity-50">{order.customer_ref}</div>
+								<div className="font-bold">{order.customer_ref.name}</div>
+								<div className="text-sm opacity-50">{order.customer_ref.email}</div>
 							</div>
 						</td>
 						<td>
 							{'$' + order.total.toFixed(2)}
 						</td>
 						<th>
-							<button className="btn btn-info" onClick={() => document.getElementById('my_modal_' + order._id).showModal()}>
+							<button className="btn btn-info"
+									onClick={() => document.getElementById('my_modal_' + order._id).showModal()}>
 								view order
 							</button>
 							<dialog id={"my_modal_" + order._id} className="modal">
 								<div className="modal-box bg-amber-50">
-									<h3 className="text-lg">Order ID: <i>{order._id}</i></h3>
+									<h3 className="text-lg">Order: <i>{order._id}</i></h3>
 									<div className='outline outline-1'>
 										<table className='table'>
 											<thead>
-												<tr className="text-sm">
-													<th>Item Name</th>
-													<th>Quantity</th>
-													<th>Subtotal</th>
-												</tr>
+											<tr className="text-sm">
+												<th>Item Name</th>
+												<th>Quantity</th>
+												<th>Subtotal</th>
+											</tr>
 											</thead>
 											<tbody>
-												{order.items.map(item => (
-													<tr>
-														<td>{item.menu_ref}</td>
-														<td>{item.quantity}</td>
-														<td>{'$' + item.subtotal.toFixed(2)}</td>
-													</tr>
-												))}
+											{order.items.map(item => (
+												<tr>
+													{/*<td>{item.menu_ref.name}</td>*/}
+													{/*<td>{item.menu_ref.quantity}</td>*/}
+													<td></td>
+													<td></td>
+													<td>{'$' + item.subtotal.toFixed(2)}</td>
+												</tr>
+											))}
 											</tbody>
 											<tfoot>
-												<tr className='outline outline-1 outline-blue-500 text-sm'>
-													<td></td>
-													<td>Total:</td>
-													<td>${order.total}</td>
-												</tr>
+											<tr className='outline outline-1 outline-blue-500 text-sm'>
+												<td></td>
+												<td>Total:</td>
+												<td>${order.total}</td>
+											</tr>
 											</tfoot>
 										</table>
 									</div>
 									<div>
-										<p>Customer: {order.customer_name} ({order.customer_email})</p>
+										<p>Customer: {order.customer_ref.name} ({order.customer_ref.email})</p>
 										<p>Pickup Time: {order.pickup_time}</p>
 										<p>Status: {order.status}</p>
-										<p>Fulfilled by: {order.staff_ref}</p>
+										{/*<p>Fulfilled by: {order.staff_ref}</p>*/}
 									</div>
 									<div className="flex gap-10 grow">
 										<p className="py-4">Press ESC key or click the button below to close</p>
@@ -94,7 +100,7 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 				</tbody>
 			</table>
 		</div>
-	)
+	);
 };
 
 export default EmployeeOrderHistoryTable;

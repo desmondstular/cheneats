@@ -15,13 +15,12 @@ import {
 
 const router = express.Router();
 
+// Route for joining orders, customers, restaurants
+router.get("/byrestaurant/:restaurant_ref", getOrderByRestaurantFull);
 router.get("/", getOrders);			// get all orders
 router.get("/:id", getOrder);			// get Order by id
 router.post("/", createOrder);		// create new Order
 router.patch("/:id", updateOrder);	// update Order by id
 router.delete("/:id", deleteOrder);	// delete Order by id
-
-// Route for joining orders, customers, restaurants
-router.get("/byrestaurant/:restaurant_ref", getOrderByRestaurantFull);
 
 export default router;

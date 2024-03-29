@@ -14,41 +14,16 @@ import EmployeeNavBar from "../../components/employeeSide/navbar.employee.comp.j
 
 const EmployeeOrderHistory = () => {
 	const [orders, setOrders] = useState([]);
-	const [customers, setCustomers] = useState([]);
-	const [menu, setMenu] = useState([]);
 	const {staffID, restaurantID} = useContext(ThemeContext);
-
+	const orderURL = 'http://localhost:8000/order/byrestaurant/' + restaurantID;
 
 	useEffect(() => {
-		axios.get(`http://localhost:8000/order`)
-			.then(result => setOrders(result.data))
-			.catch(err => console.log(err));
-
-		axios.get(`http://localhost:8000/customer`)
-			.then(result => setCustomers(result.data))
-			.catch(err => console.log(err));
-
-		// axios.get(`http://localhost:8000/menu/restaurant/${restaurantId}`)
-		// 	.then(result => setMenu(result.data))
-		// 	.catch(err => console.log(err));
-	}, []);
-
-	// useEffect(() => {
-	// 	// Join orders, customer, menu table
-	// 	orders.forEach((order) => {
-	// 		// Join customer name and email
-	// 		const { name, email } = customers.find(({_id}) => _id === order.customer_ref);
-	// 		order["customer_name"] = name;
-	// 		order["customer_email"] = email;
-	// 		setJoinedOrders(joinedOrders.push(order));
-	//
-	// 		// Join order menu item names
-	// 		order.items.forEach((item) => {
-	// 			const { name } = menu.find(({_id}) => _id === item.menu_ref);
-	// 			item["item_name"] = name;
-	// 		})
-	// 	});
-	// }, ["orders"])
+		if (restaurantID !== '') {
+			axios.get('http://localhost:8000/order/byrestaurant/' + restaurantID)
+				.then(result => setOrders(result.data))
+				.catch(err => console.log(err));
+		}
+	}, [restaurantID]);
 
 	return (
 		<div>

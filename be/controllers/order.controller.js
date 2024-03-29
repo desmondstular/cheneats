@@ -88,7 +88,8 @@ export const getOrderByRestaurantFull = async(req, res, next) => {
 	const {restaurant_ref} = req.params;
 	try {
 		const orders = await getOrdersByRestaurantPopulated(
-			{'restaurant_ref': restaurant_ref});
+			{ 'restaurant_ref': restaurant_ref }
+		);
 		res.status(200).send(orders);
 	} catch (e) {
 		next(e);
