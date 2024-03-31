@@ -74,3 +74,21 @@ export const getOrdersByRestaurantPopulated = async (query) => {
 		throw e;
 	}
 }
+
+/**
+ * Gets all orders for a specific customer and populates
+ * all object references.
+ */
+export const getOrdersByCustomerPopulated = async (query) => {
+	try {
+		const orders = await Order.find(query)
+			.populate('restaurant_ref')
+			.populate('staff_ref')
+			.populate({
+				path: 'items',
+				populate: 'menu_ref'});
+		return orders;
+	} catch (e) {
+		throw e;
+	}
+}
