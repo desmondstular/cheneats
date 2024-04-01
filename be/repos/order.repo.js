@@ -34,6 +34,33 @@ export const updateOrderInRepo = async (query, update) => {
     }
 }
 
+export const addItemToOrderRepo = async (query, newItem) => {
+    try {
+        // Find the order document by its ID
+        const order = await Order.findOne(query);
+
+        if (!order) {
+            throw new Error('Order not found');
+        }
+
+        // Add the new item to the items array
+        order.items.push(newItem);
+        //let orderTotal = order.total;
+        order.total = (order.total + newItem.subtotal)
+
+
+        // Save the updated order document
+        const updatedOrder = await order.save();
+
+        return updatedOrder;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+
+
 /**
  * Deletes a order from the database.
  */
@@ -46,11 +73,11 @@ export const deleteOrderFromRepo = async (query) => {
 }
 
 /**
- * Creates a new restaurant in the database.
+ * Creates a new order in the database.
  */
-export const createOrderInRepo = async (payload) => {
+export const createOrderInRepo = async (restaurant_ref, customer_ref, status, total) => {
     try {
-        const newOrder = new Order(payload);
+        const newOrder = new Order({ restaurant_ref, customer_ref, status, total });
         return await newOrder.save();
     } catch (e) {
         throw e;

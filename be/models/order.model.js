@@ -13,12 +13,13 @@ const orderSchema = new mongoose.Schema(
 		"staff_ref": {type: mongoose.Types.ObjectId, ref: "staff"},
 		"pickup_time": {type: String},
         "items": [{
-            "menu_ref": {type: mongoose.Types.ObjectId, ref: "menu", required: true},
-            "quantity": {type: Number, min: 1, required: true},
-			"subtotal": {type: Number, min: 0, required: true}
+            "menu_ref": {type: mongoose.Types.ObjectId, ref: "menu"},
+            "name": {type: String},
+            "quantity": {type: Number, min: 1},
+			"subtotal": {type: Number, min: 0}
         }],
-        "total": {type: Number, required: true},
-        "status": {type: String, required: true, value: ["ordered", "in-progress", "awaiting-pickup", "completed"]}
+        "total": {type: Number},
+        "status": {type: String, value: ["carted","ordered", "in-progress", "awaiting-pickup", "completed"]}
     },
     {
         timestamps: true,
