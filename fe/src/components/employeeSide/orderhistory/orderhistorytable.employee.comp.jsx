@@ -3,14 +3,7 @@
  */
 import {orderSort, statusSortBy} from "./orderhistoryhelpers.employee.js";
 
-export const EmployeeOrderHistoryTable = ({orders, customers}) => {
-	// Join orders and customers by ref, attach customer name to order
-	orders.forEach((order) => {
-		const { name, email } = customers.find(({_id}) => _id === order.customer_ref);
-		order["customer_name"] = name;
-		order["customer_email"] = email;
-	});
-
+export const EmployeeOrderHistoryTable = ({orders}) => {
 	// Sorts orders by status, shows active at top
 	orderSort({
 		data: orders,
@@ -19,7 +12,7 @@ export const EmployeeOrderHistoryTable = ({orders, customers}) => {
 	});
 
 	return (
-		<div className="overflow-x-auto">
+		<div className="overflow-x-auto rounded-box p-4">
 			<table className="table">
 				<thead>
 				<tr className="text-base">
@@ -37,15 +30,15 @@ export const EmployeeOrderHistoryTable = ({orders, customers}) => {
 						</td>
 						<td>
 							<div>
-								<div className="font-bold">{order.customer_email}</div>
-								<div className="text-sm opacity-50">{order.customer_name}</div>
+								<div className="font-bold">{order.customer_ref}</div>
+								<div className="text-sm opacity-50">{order.customer_ref}</div>
 							</div>
 						</td>
 						<td>
 							{'$' + order.total.toFixed(2)}
 						</td>
 						<th>
-							<button className="btn text-amber-50 bg-blue-700 hover:bg-blue-300" onClick={() => document.getElementById('my_modal_' + order._id).showModal()}>
+							<button className="btn btn-info" onClick={() => document.getElementById('my_modal_' + order._id).showModal()}>
 								view order
 							</button>
 							<dialog id={"my_modal_" + order._id} className="modal">

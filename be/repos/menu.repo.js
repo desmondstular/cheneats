@@ -19,15 +19,16 @@ export const getMenuFromRepo = async (query) => {
 
 /**
  * Gets menu items from the database for a specific restaurant.
+ * @param {string} restaurantId - The ID of the restaurant.
+ * @returns {Promise<Array>} - A promise that resolves to an array of menu items.
  */
 export const getMenuByRestaurantFromRepo = async (restaurantId) => {
     try {
-        return await Menu.find({ restaurant_ref: restaurantId });
+        return await Menu.find({ restaurant_ref: restaurantId }).exec();
     } catch (e) {
-        console.log(e);
         throw e;
     }
-}
+};
 
 /**
  * Updates an existing menu item in the database.

@@ -1,8 +1,10 @@
-import React from 'react';
 import {Link, useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {ThemeContext} from "../../.store/ThemeContext.jsx";
 import Cookies from "js-cookie";
 
-const CustomerNavBar = () => {
+const EmployeeNavBar = () => {
+	const {restaurantID, employeeID} = useContext(ThemeContext);
 	const navigate = useNavigate();
 
 	const onClickLogout = () => {
@@ -24,9 +26,10 @@ const CustomerNavBar = () => {
 				</a>
 				<div className='flex-1'>
 					<div className='flex justify-center gap-2'>
-						<Link to='/customerhome' className="btn btn-ghost text-md">Home</Link>
-						<Link to='/customerhome' className="btn btn-ghost text-md">Restaurants</Link>
-						<Link to='/customerOrderHistory' className="btn btn-ghost text-md">Order History</Link>
+						<Link to='/employeeHome' className="btn btn-ghost text-md">Home</Link>
+						<Link to='/employeeEditMenu/' className="btn btn-ghost text-md">Menu</Link>
+						<Link to='/employeeOrderHistory' className="btn btn-ghost text-md">Order History</Link>
+						<Link to='/employeeAnalytics' className="btn btn-ghost text-md">Analytics</Link>
 					</div>
 				</div>
 				<div className="flex-none">
@@ -78,4 +81,4 @@ const CustomerNavBar = () => {
 	);
 }
 
-export default CustomerNavBar;
+export default EmployeeNavBar;
