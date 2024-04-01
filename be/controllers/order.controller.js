@@ -4,11 +4,14 @@
  * Contains controller functions for restaurants.
  */
 import {
+    addItemToOrderRepo,
     createOrderInRepo,
     deleteOrderFromRepo,
     getOrderFromRepo,
     updateOrderInRepo
 } from "../repos/order.repo.js";
+import mongoose from "mongoose";
+import {getMenuFromRepo} from "../repos/menu.repo.js";
 
 /**
  * Returns a list of all orders in the database.
@@ -35,6 +38,21 @@ export const getOrder = async (req, res, next) => {
     }
 }
 
+export const getCartedOrderByCustomerIdRestaurantId = async (req, res, next) => {
+    const { restaurant_id, customer_id } = req.params;
+    try {
+        const order = await getOrderFromRepo({
+            customer_ref: customer_id,
+            restaurantID: restaurant_id,
+            status: 'carted'
+        });
+        res.status(200).send(order);
+    } catch (e) {
+        next(e);
+    }
+}
+
+
 /**
  * Updates an order in the database by their id.
  */
@@ -48,6 +66,24 @@ export const updateOrder = async (req, res, next) => {
         next(e);
     }
 }
+
+
+export const addItemToOrder = async (req, res, next) => {
+    const { id, restaurant_id, customer_id } = req.params; // Extract order ID, restaurant ID, and customer ID from req.params
+    const { newItem} = req.body;
+
+    try {
+        // Call addItemToOrderRepo with the correct parameters
+        const order = await addItemToOrderRepo({_id: id}, newItem);
+
+        res.status(200).json(order);
+    } catch (e) {
+        next(e);
+    }
+};
+
+
+
 
 /**
  * Deletes an order in the database by their id.
@@ -70,12 +106,13 @@ export const deleteOrder = async (req, res, next) => {
  * Creates an order in the database.
  */
 export const createOrder = async(req, res, next) => {
-    const {body} = req;
+    const { body } = req;
     try {
-        const order = await createOrderInRepo(body);
+        const order = await createOrderInRepo(body.restaurant_ref, body.customer_ref, "carted", 0.00);
         console.log("New order:\n", order);
-        res.status(200).send();
+        res.status(201).json(order);
     } catch (e) {
         next(e);
     }
 }
+
