@@ -7,11 +7,12 @@ import {
     addItemToOrderRepo,
     createOrderInRepo,
     deleteOrderFromRepo,
-    getOrderFromRepo,
+    getOrderFromRepo, removeItemFromOrderRepo,
     updateOrderInRepo
 } from "../repos/order.repo.js";
 import mongoose from "mongoose";
 import {getMenuFromRepo} from "../repos/menu.repo.js";
+import res from "express/lib/response.js";
 
 /**
  * Returns a list of all orders in the database.
@@ -43,7 +44,7 @@ export const getCartedOrderByCustomerIdRestaurantId = async (req, res, next) => 
     try {
         const order = await getOrderFromRepo({
             customer_ref: customer_id,
-            restaurantID: restaurant_id,
+            restaurant_ref: restaurant_id,
             status: 'carted'
         });
         res.status(200).send(order);
@@ -81,7 +82,19 @@ export const addItemToOrder = async (req, res, next) => {
         next(e);
     }
 };
+export const removeItemFromOrder =  async (req, res, next) => {
+    const {id, item_id} = req.params;
+    const itemToRemove  = req.body;
 
+    try {
+        console.log(id)
+        console.log(itemToRemove)
+        const order = await removeItemFromOrderRepo ({_id: id}, itemToRemove);
+        res.status(200).json(order);
+    } catch (e) {
+        next(e);
+    }
+}
 
 
 
