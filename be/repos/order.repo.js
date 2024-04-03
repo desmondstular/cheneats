@@ -48,6 +48,36 @@ export const addItemToOrderRepo = async (query, newItem) => {
         //let orderTotal = order.total;
         order.total = (order.total + newItem.subtotal)
 
+        // Save the updated order document
+        const updatedOrder = await order.save();
+
+        return updatedOrder;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const removeItemFromOrderRepo = async (query, itemToRemove) => {
+    try {
+        // Find the order document by its ID
+        const order = await Order.findOne(query);
+
+        if (!order) {
+            throw new Error('Order not found');
+        }
+        // Find the index of the item to remove
+        const indexToRemove = order.items.findIndex(item => item._id.toString() === itemToRemove._id.toString());
+
+        if (indexToRemove === -1) {
+            throw new Error('Item not found in order');
+        }
+
+        // Remove the item from the items array
+        const removedItem = order.items.splice(indexToRemove, 1)[0];
+
+        // Subtract the subtotal of the removed item from the order's total
+        order.total -= itemToRemove.subtotal.toFixed(2);
+        order.total = parseFloat(order.total.toFixed(2));
 
         // Save the updated order document
         const updatedOrder = await order.save();
@@ -57,6 +87,7 @@ export const addItemToOrderRepo = async (query, newItem) => {
         throw error;
     }
 };
+
 
 
 

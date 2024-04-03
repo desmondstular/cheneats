@@ -10,7 +10,7 @@ import {
     createOrder,
     deleteOrder, getCartedOrderByCustomerIdRestaurantId,
     getOrder,
-    getOrders,
+    getOrders, removeItemFromOrder,
     updateOrder
 } from "../controllers/order.controller.js";
 
@@ -21,6 +21,7 @@ router.get("/:id", getOrder);			// get Order by id
 router.post("/", createOrder); // create new Order
 router.patch("/:id", updateOrder);
 router.patch("/:id/:restaurant_id/:customer_id", addItemToOrder);
+router.patch("/:id/:item_id", removeItemFromOrder);
 // update Order by id
 router.delete("/:id", deleteOrder); // delete Order by id
 router.get("/:restaurant_id/:customer_id", getCartedOrderByCustomerIdRestaurantId)
