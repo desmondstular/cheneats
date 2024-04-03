@@ -1,15 +1,16 @@
 /**
- * orderhistorytable.employee.comp.jsx
+ * orderhistorytable.customer.comp.jsx
  */
-import {orderSort, statusSortBy} from "./orderhistoryhelpers.employee.js";
 
-export const EmployeeOrderHistoryTable = ({orders}) => {
+const CustomerOrderHistoryTable = ({orders}) => {
 	// Sorts orders by status, shows active at top
-	orderSort({
-		data: orders,
-		sortBy: [...statusSortBy, "other"],
-		sortField: "status"
-	});
+	// orderSort({
+	// 	data: orders,
+	// 	sortBy: [...statusSortBy, "other"],
+	// 	sortField: "status"
+	// });
+
+	console.log(orders);
 
 	return (
 		<div className="overflow-x-auto pl-32 pr-32">
@@ -17,7 +18,7 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 				<thead className='bg-'>
 				<tr className="text-base">
 					<th>Status</th>
-					<th>Customer</th>
+					<th>Restaurant</th>
 					<th>Price</th>
 					<th></th>
 				</tr>
@@ -27,12 +28,11 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 					<tr>
 						<td>
 							<span
-								className={order.status === "completed" ? "badge badge-md badge-accent hover:badge-success w-24" : "w-24 badge badge-md badge-error"}>{order.status}</span>
+								className={order.status === "completed" ? "badge badge-md badge-accent hover:badge-success w-32" : "w-32 badge badge-md badge-error"}>{order.status}</span>
 						</td>
 						<td>
 							<div>
-								<div className="font-bold">{order.customer_ref.name}</div>
-								<div className="text-sm opacity-50">{order.customer_ref.email}</div>
+								<div className="font">{order.restaurant_ref.name}</div>
 							</div>
 						</td>
 						<td>
@@ -60,9 +60,8 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 											{order.items.map(item => (
 												<tr>
 													{/*<td>{item.menu_ref.name}</td>*/}
-													{/*<td>{item.menu_ref.quantity}</td>*/}
 													<td></td>
-													<td></td>
+													<td>{item.quantity}</td>
 													<td>{'$' + item.subtotal.toFixed(2)}</td>
 												</tr>
 											))}
@@ -77,7 +76,8 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 										</table>
 									</div>
 									<div>
-										<p>Customer: {order.customer_ref.name} ({order.customer_ref.email})</p>
+										<p>Restaurant: {order.restaurant_ref.name}</p>
+										<p>Location: {order.restaurant_ref.location}</p>
 										<p>Pickup Time: {order.pickup_time}</p>
 										<p>Status: {order.status}</p>
 										{/*<p>Fulfilled by: {order.staff_ref}</p>*/}
@@ -101,4 +101,4 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 	);
 };
 
-export default EmployeeOrderHistoryTable;
+export default CustomerOrderHistoryTable;

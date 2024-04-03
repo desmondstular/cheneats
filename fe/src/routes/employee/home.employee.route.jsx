@@ -3,6 +3,7 @@ import {useContext, useEffect} from "react";
 import {ThemeContext} from "../../.store/ThemeContext.jsx";
 import Cookies from "js-cookie";
 import EmployeeNavBar from "../../components/employeeSide/navbar.employee.comp.jsx";
+import {Clock} from "../../components/clock/clock.comp.jsx";
 
 const EmployeeHome = () => {
 	const {restaurantID, employeeID} = useContext(ThemeContext);
@@ -18,6 +19,7 @@ const EmployeeHome = () => {
 	return (
 		<div>
 			<EmployeeNavBar></EmployeeNavBar>
+			<Clock/>
 		</div>
 	)
 }
