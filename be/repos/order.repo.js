@@ -47,7 +47,7 @@ export const addItemToOrderRepo = async (query, newItem) => {
         order.items.push(newItem);
         //let orderTotal = order.total;
         order.total = (order.total + newItem.subtotal)
-
+        order.total = parseFloat(order.total.toFixed(2));
         // Save the updated order document
         const updatedOrder = await order.save();
 
