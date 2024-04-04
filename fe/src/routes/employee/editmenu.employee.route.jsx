@@ -214,7 +214,7 @@ function EmployeeEditMenu() {
 								</select>
 							</div>
 							<div className="form-group">
-								<label>Discount</label>
+								<label>Sale Price</label>
 								<input type="number" name="discount" value={editedItem.discount} onChange={handleInputChange} step="any" className="form-control" />
 							</div>
 							<div className="form-group">
