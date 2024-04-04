@@ -10,10 +10,12 @@ import {
 	getStaff,
 	updateStaff,
 	deleteStaff,
-	createStaff
+	createStaff, getStaffByEmail
 } from "../controllers/staff.controller.js";
 
 const router = express.Router();
+
+router.get("/byemail/:id", getStaffByEmail);	// Get staff by email address
 
 router.get("/", getStaffs);			// Get all items
 router.get("/:id", getStaff);			// Get item by id
