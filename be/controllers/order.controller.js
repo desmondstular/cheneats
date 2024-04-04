@@ -7,7 +7,8 @@ import {
     createOrderInRepo,
     deleteOrderFromRepo,
     getOrderFromRepo,
-    updateOrderInRepo
+    updateOrderInRepo,
+    getOrdersByRestaurantPopulated
 } from "../repos/order.repo.js";
 
 /**
@@ -75,6 +76,22 @@ export const createOrder = async(req, res, next) => {
         const order = await createOrderInRepo(body);
         console.log("New order:\n", order);
         res.status(200).send();
+    } catch (e) {
+        next(e);
+    }
+}
+
+/**
+ * Sends orders with customer, staff, menu object references
+ * for a specific restaurant.
+ */
+export const getOrderByRestaurantFull = async(req, res, next) => {
+    const {restaurant_ref} = req.params;
+    try {
+        const orders = await getOrdersByRestaurantPopulated(
+            { 'restaurant_ref': restaurant_ref }
+        );
+        res.status(200).send(orders);
     } catch (e) {
         next(e);
     }
