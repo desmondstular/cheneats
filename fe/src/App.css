@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(191, 254, 247);
 }
 
 .App-logo {
@@ -14,19 +15,20 @@
 }
 
 .App-header {
-  background-color: beige; /* Change this line to set the desired background color */
+  background-color: rgb(191, 254, 247);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: rgb(191, 254, 247);
 
 }
 
 .App-link {
   color: #c9ecf6;
+  background-color: rgb(191, 254, 247);
 }
 
 @keyframes App-logo-spin {
@@ -37,6 +39,7 @@
     transform: rotate(360deg);
   }
 }
+
 .vh-100 {
   background-color: rgb(191, 254, 247);
 }
