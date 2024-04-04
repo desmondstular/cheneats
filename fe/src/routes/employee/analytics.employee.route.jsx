@@ -123,6 +123,13 @@ const EmployeeAnalytics = () => {
         },
         legend: {
           display: false
+        },
+        scales: {
+            y: {
+                ticks: {
+                    stepSize: 1 // Display y-axis ticks in steps of 1 (integer values)
+                }
+            }
         }
     };
 

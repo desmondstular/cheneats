@@ -166,13 +166,13 @@ function EmployeeEditMenu() {
 									<td>{menuItem.discount}</td>
 									<td>{menuItem.on_special ? 'Yes' : 'No'}</td>
 									<td>
-                                        <button onClick={() => openEditModal(menuItem)} className='flex items-center text-white bg-cyan-500 hover:bg-cyan-600 py-2 px-4 rounded-lg'>
+                                        <button onClick={() => openEditModal(menuItem)} className='btn flex items-center text-white bg-cyan-500 hover:bg-cyan-600 py-2 px-4 rounded-lg'>
                                         <img src={EditIcon} className="h-6 w-6 mr-2" alt="Edit Icon" />
                                         Edit
                                         </button>
                                     </td>
 									<td>
-                                        <button onClick={() => openDeleteModal(menuItem)} className="flex items-center text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-lg">
+                                        <button onClick={() => openDeleteModal(menuItem)} className="btn flex items-center text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-lg">
                                         <img src={TrashCanIcon} className="h-6 w-6 mr-2" alt="Trash Can Icon" />
                                         Delete
                                         </button>
