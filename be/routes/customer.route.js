@@ -8,12 +8,14 @@ import express from "express";
 import {
 	createCustomer,
 	deleteCustomer,
-	getCustomer,
+	getCustomer, getCustomerByEmail,
 	getCustomers,
 	updateCustomer
 } from "../controllers/customer.controller.js";
 
 const router = express.Router();
+
+router.get("/byemail", getCustomerByEmail);	// get customer by email
 
 router.get("/", getCustomers);				// get all customers
 router.get("/:id", getCustomer);			// get by id

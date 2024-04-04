@@ -15,7 +15,7 @@ import {
 
 const router = express.Router();
 
-router.get("/byemail/:id", getStaffByEmail);	// Get staff by email address
+router.get("/byemail", getStaffByEmail);	// Get staff by email address
 
 router.get("/", getStaffs);			// Get all items
 router.get("/:id", getStaff);			// Get item by id
