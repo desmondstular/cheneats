@@ -114,3 +114,39 @@ export const createOrderInRepo = async (restaurant_ref, customer_ref, status, to
         throw e;
     }
 }
+
+/**
+ * Gets all orders for a specific restaurant and populates
+ * all object references.
+ */
+export const getOrdersByRestaurantPopulated = async (query) => {
+	try {
+		const orders = await Order.find(query)
+			.populate('customer_ref')
+			.populate('staff_ref')
+			.populate({
+				path: 'items',
+				populate: 'menu_ref'});
+		return orders;
+	} catch (e) {
+		throw e;
+	}
+}
+
+/**
+ * Gets all orders for a specific customer and populates
+ * all object references.
+ */
+export const getOrdersByCustomerPopulated = async (query) => {
+	try {
+		const orders = await Order.find(query)
+			.populate('restaurant_ref')
+			.populate('staff_ref')
+			.populate({
+				path: 'items',
+				populate: 'menu_ref'});
+		return orders;
+	} catch (e) {
+		throw e;
+	}
+}

@@ -8,13 +8,22 @@ import express from "express";
 import {
     addItemToOrder,
     createOrder,
-    deleteOrder, getCartedOrderByCustomerIdRestaurantId,
+    deleteOrder,
+    getCartedOrderByCustomerIdRestaurantId,
+    getOrderByCustomerFull,
+    getOrderByRestaurantFull,
     getOrder,
-    getOrders, removeItemFromOrder,
+    getOrders,
+    removeItemFromOrder,
     updateOrder
+
 } from "../controllers/order.controller.js";
 
 const router = express.Router();
+
+// Route for joining orders, customers, restaurants
+router.get("/byrestaurant/:restaurant_ref", getOrderByRestaurantFull);
+router.get("/bycustomer/:customer_ref", getOrderByCustomerFull);
 
 router.get("/", getOrders);			// get all orders
 router.get("/:id", getOrder);			// get Order by id

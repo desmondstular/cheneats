@@ -5,10 +5,13 @@
  */
 import {
     addItemToOrderRepo,
-    createOrderInRepo,
-    deleteOrderFromRepo,
-    getOrderFromRepo, removeItemFromOrderRepo,
-    updateOrderInRepo
+    removeItemFromOrderRepo,
+	createOrderInRepo,
+	deleteOrderFromRepo,
+	getOrderFromRepo,
+    getOrdersByCustomerPopulated,
+    getOrdersByRestaurantPopulated,
+	updateOrderInRepo
 } from "../repos/order.repo.js";
 import mongoose from "mongoose";
 import {getMenuFromRepo} from "../repos/menu.repo.js";
@@ -129,3 +132,34 @@ export const createOrder = async(req, res, next) => {
     }
 }
 
+/**
+ * Sends orders with customer, staff, menu object references
+ * for a specific restaurant.
+ */
+export const getOrderByRestaurantFull = async(req, res, next) => {
+	const {restaurant_ref} = req.params;
+	try {
+		const orders = await getOrdersByRestaurantPopulated(
+			{ 'restaurant_ref': restaurant_ref }
+		);
+		res.status(200).send(orders);
+	} catch (e) {
+		next(e);
+	}
+}
+
+/**
+ * Sends orders with restaurant, staff, menu object references
+ * for a specific customer.
+ */
+export const getOrderByCustomerFull = async(req, res, next) => {
+	const {customer_ref} = req.params;
+	try {
+		const orders = await getOrdersByCustomerPopulated(
+			{ 'customer_ref': customer_ref }
+		);
+		res.status(200).send(orders);
+	} catch (e) {
+		next(e);
+	}
+}

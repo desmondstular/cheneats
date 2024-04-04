@@ -13,6 +13,7 @@ import customerRoute from "./routes/customer.route.js";
 import orderRoute from "./routes/order.route.js";
 import restaurantRoute from "./routes/restaurant.route.js";
 import menuRoute from "./routes/menu.route.js";
+import staffRoute from "./routes/staff.route.js";
 
 const port = 8000;
 const app = express();
@@ -31,6 +32,7 @@ app.use("/customer", customerRoute);
 app.use("/restaurant", restaurantRoute);
 app.use("/order", orderRoute);
 app.use("/menu", menuRoute)
+app.use("/staff", staffRoute)
 
 // Configure listening
 app.listen(port, () => {
