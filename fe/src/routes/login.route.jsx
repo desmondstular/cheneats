@@ -70,13 +70,15 @@ function Login () {
 					Cookies.set('customerID', data[0]._id);
 					navigate('/customerHome', {replace: true});
 				}
+				else {
+					setError(true);
+				}
 			} catch (e) {
 				console.log(e);
 			}
 		}
 		getStaff();
 		getCustomer();
-		setError(true);
 	}
 
 	/**
