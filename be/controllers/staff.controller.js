@@ -80,15 +80,14 @@ export const createStaff = async(req, res, next) => {
 	}
 }
 
-
 /**
- * Gets a staff member by email.
+ * Get staff by email.
  */
 export const getStaffByEmail = async(req, res, next) => {
-	const {email} = req.query;
+	const {email} = req;
 	try {
-		const staff = await getStaffFromRepo({email: email});
-		res.status(200).send(staff);
+		const staff = await getStaffByEmail(email);
+		res.status(200).send()
 	} catch (e) {
 		next(e);
 	}
