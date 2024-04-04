@@ -1,16 +1,20 @@
 /**
  * orderhistorytable.customer.comp.jsx
  */
+import {orderSort, statusSortBy} from "../../employeeSide/orderhistory/orderhistoryhelpers.employee.js";
 
-const CustomerOrderHistoryTable = ({orders}) => {
-	// Sorts orders by status, shows active at top
-	// orderSort({
-	// 	data: orders,
-	// 	sortBy: [...statusSortBy, "other"],
-	// 	sortField: "status"
-	// });
+const CustomerOrderHistoryTable = ({ orders }) => {
+	//Sorts orders by status, shows active at top
+	orderSort({
+		data: orders,
+		sortBy: [...statusSortBy, "other"],
+		sortField: "status"
+	});
 
-	console.log(orders);
+	// filter away carted orders
+	orders = orders.filter(function( obj ) {
+		return obj.status !== 'carted';
+	});
 
 	return (
 		<div className="overflow-x-auto pl-32 pr-32">
@@ -59,15 +63,14 @@ const CustomerOrderHistoryTable = ({orders}) => {
 											<tbody>
 											{order.items.map(item => (
 												<tr>
-													{/*<td>{item.menu_ref.name}</td>*/}
-													<td></td>
+													<td>{item.menu_ref ? item.menu_ref.name : 'undefined'}</td>
 													<td>{item.quantity}</td>
 													<td>{'$' + item.subtotal.toFixed(2)}</td>
 												</tr>
 											))}
 											</tbody>
 											<tfoot>
-											<tr className='outline outline-2 outline-blue-500 text-sm'>
+											<tr className='text-sm'>
 												<td></td>
 												<td>Total:</td>
 												<td>${order.total}</td>
@@ -80,7 +83,7 @@ const CustomerOrderHistoryTable = ({orders}) => {
 										<p>Location: {order.restaurant_ref.location}</p>
 										<p>Pickup Time: {order.pickup_time}</p>
 										<p>Status: {order.status}</p>
-										{/*<p>Fulfilled by: {order.staff_ref}</p>*/}
+										<p>Fulfilled by: {order.staff_ref ? order.staff_ref.name : 'undefined'}</p>
 									</div>
 									<div className="justify-center">
 										<div className="modal-action">
