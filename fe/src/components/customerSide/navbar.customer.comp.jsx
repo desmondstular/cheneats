@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import UserIcon from '../../icons/user.png';
 
 const CustomerNavBar = () => {
 	const navigate = useNavigate();
@@ -57,7 +58,7 @@ const CustomerNavBar = () => {
 						<div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
 							<div className="w-10 rounded-full">
 								<img alt="Tailwind CSS Navbar component"
-									 src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
+									 src={UserIcon}/>
 							</div>
 						</div>
 						<ul tabIndex={0}
@@ -65,10 +66,8 @@ const CustomerNavBar = () => {
 							<li>
 								<a className="justify-between">
 									Profile
-									<span className="badge">New</span>
 								</a>
 							</li>
-							<li><a>Settings</a></li>
 							<li onClick={onClickLogout}><a>Logout</a></li>
 						</ul>
 					</div>

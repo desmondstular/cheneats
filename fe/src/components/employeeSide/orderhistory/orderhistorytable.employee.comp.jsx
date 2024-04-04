@@ -43,8 +43,8 @@ export const EmployeeOrderHistoryTable = ({orders}) => {
 						<td>
 							{'$' + order.total.toFixed(2)}
 						</td>
-						<th className='flex justify-center'>
-							<button className="btn btn-info"
+						<th className=''>
+							<button className="btn h-12 w-30 items-center text-white bg-cyan-500 hover:bg-cyan-600 py-2 px-4 rounded-lg"
 									onClick={() => document.getElementById('my_modal_' + order._id).showModal()}
 							>
 								view order

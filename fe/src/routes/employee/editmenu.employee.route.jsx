@@ -7,6 +7,8 @@ import Modal from 'react-modal';
 import {ThemeContext} from "../../.store/ThemeContext.jsx";
 import Cookies from "js-cookie";
 import EmployeeNavBar from "../../components/employeeSide/navbar.employee.comp.jsx";
+import TrashCanIcon from '../../icons/trash.svg';
+import EditIcon from '../../icons/edit.png';
 
 function EmployeeEditMenu() {
 	const {restaurantID} = useContext(ThemeContext);
@@ -138,7 +140,7 @@ function EmployeeEditMenu() {
 			<div className="d-flex vh-100 justify-content-center align-items-center">
 				<div className="w-3/4 bg-white rounded p-3">
 					<div className="btn-group pb-2">
-						<button onClick={() => openNewModal(newMenuItem)} className='btn btn-secondary rounded-end'>Add a Menu Item +</button>
+						<button onClick={() => openNewModal(newMenuItem)} className='btn text-white bg-green-500 hover:bg-green-600'>Add a Menu Item +</button>
 					</div>
 					<TableContainer sx={{ maxHeight: 600, maxWidth: 1400, height: 'auto', margin: 'auto' }} component={Paper}>
 						<table className="table">
@@ -164,10 +166,16 @@ function EmployeeEditMenu() {
 									<td>{menuItem.discount}</td>
 									<td>{menuItem.on_special ? 'Yes' : 'No'}</td>
 									<td>
-										<button onClick={() => openEditModal(menuItem)} className='btn btn-primary rounded-end'>Edit</button>
-									</td>
+                                        <button onClick={() => openEditModal(menuItem)} className='btn flex items-center text-white bg-cyan-500 hover:bg-cyan-600 py-2 px-4 rounded-lg'>
+                                        <img src={EditIcon} className="h-6 w-6 mr-2" alt="Edit Icon" />
+                                        Edit
+                                        </button>
+                                    </td>
 									<td>
-										<button onClick={() => openDeleteModal(menuItem)} className='btn btn-secondary rounded-end'>Delete</button>
+                                        <button onClick={() => openDeleteModal(menuItem)} className="btn flex items-center text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-lg">
+                                        <img src={TrashCanIcon} className="h-6 w-6 mr-2" alt="Trash Can Icon" />
+                                        Delete
+                                        </button>
 									</td>
 								</tr>
 							))}
@@ -206,7 +214,7 @@ function EmployeeEditMenu() {
 								</select>
 							</div>
 							<div className="form-group">
-								<label>Discount</label>
+								<label>Sale Price</label>
 								<input type="number" name="discount" value={editedItem.discount} onChange={handleInputChange} step="any" className="form-control" />
 							</div>
 							<div className="form-group">
@@ -217,8 +225,8 @@ function EmployeeEditMenu() {
 								</select>
 							</div>
 							<div className="d-flex justify-content-between mt-3">
-								<button type="button" className="btn btn-secondary" onClick={closeEditModal}>Discard Changes</button>
-								<button type="submit" className="btn btn-primary">Save Changes</button>
+								<button type="button" className="btn text-white bg-red-500 hover:bg-red-600" onClick={closeEditModal}>Discard Changes</button>
+								<button type="submit" className="btn text-white bg-green-500 hover:bg-green-600">Save Changes</button>
 							</div>
 						</form>
 					</Modal>
@@ -269,8 +277,8 @@ function EmployeeEditMenu() {
 								</select>
 							</div>
 							<div className="d-flex justify-content-between mt-3">
-								<button type="button" className="btn btn-secondary" onClick={closeNewModal}>Discard Changes</button>
-								<button type="submit" className="btn btn-primary">Add Item</button>
+								<button type="button" className="btn text-white bg-red-500 hover:bg-red-600" onClick={closeNewModal}>Discard Changes</button>
+								<button type="submit" className="btn text-white bg-green-500 hover:bg-green-600">Add Item</button>
 							</div>
 						</form>
 					</Modal>
@@ -289,8 +297,8 @@ function EmployeeEditMenu() {
 						}}>
 						<h2>Are you sure you want to delete this item?</h2>
 						<div className="d-flex justify-content-between mt-3">
-							<button onClick={() => deleteItem(selectedMenuItem)} className="btn btn-danger">Yes</button>
-							<button onClick={closeDeleteModal} className="btn btn-secondary">No</button>
+							<button onClick={() => deleteItem(selectedMenuItem)} className="btn bg-gray-200 hover:bg-gray-400">Yes</button>
+							<button onClick={closeDeleteModal} className="btn bg-gray-200 hover:bg-gray-400">No</button>
 						</div>
 					</Modal>
 
