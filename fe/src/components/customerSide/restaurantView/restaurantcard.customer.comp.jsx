@@ -5,9 +5,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
 
-export const RestaurantcardCustomerComp = ({restaurant, activeCustomer}) => {
+export const RestaurantcardCustomerComp = ({restaurant}) => {
     return (
-        <Link to={`/customerOrder/${restaurant._id}/${activeCustomer}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/customerOrder/${restaurant._id}`} style={{ textDecoration: 'none' }}>
         <Card
         style={{maxWidth:400, maxHeight: 400, width: 'auto', height: 'auto', margin: '8px 4px'}}>
             <CardHeader
@@ -22,7 +22,7 @@ export const RestaurantcardCustomerComp = ({restaurant, activeCustomer}) => {
                 <Typography variant="body2" color="text.secondary">
                     Cuisine: {restaurant.cuisine}<br />
                     Opening Time: {restaurant.open_time}<br />
-                    Closing Time: {restaurant.close_time}
+                    Closing Time: {restaurant.closing_time}
                 </Typography>
             </CardContent>
         </Card>

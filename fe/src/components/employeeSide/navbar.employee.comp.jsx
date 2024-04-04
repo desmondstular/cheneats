@@ -1,10 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useContext} from "react";
-import {ThemeContext} from "../../.store/ThemeContext.jsx";
 import Cookies from "js-cookie";
 
 const EmployeeNavBar = () => {
-	const {restaurantID, employeeID} = useContext(ThemeContext);
 	const navigate = useNavigate();
 
 	const onClickLogout = () => {
@@ -15,7 +12,7 @@ const EmployeeNavBar = () => {
 	}
 
     return (
-		<div className="navbar h-19 bg-base-100">
+		<div className="navbar h-19 shadow-md bg-white">
 			<div className='flex-1'>
 				<a className='flex items-center gap-2'>
 					<div className="w-14 rounded-full drop-shadow-xl">

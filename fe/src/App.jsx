@@ -22,7 +22,8 @@ function App() {
 					<Routes>
 						<Route path='/' element={<Login/>}/>
 						<Route path='/customerHome/' element={<CustomerHome/>}/>
-						<Route path='/customerOrder/:restaurantId/:customerId' element={<CustomerOrder/>}/>
+						<Route path='/customerOrder/:restaurantID' element={<CustomerOrder/>}/>
+						{/*<Route path='/customerOrderHistory' element={<CustomerOrderHistory/>}/>*/}
 						<Route path='/customerOrderHistory' element={<CustomerOrderHistory/>}/>
 
 						<Route path='/employeeHome' element={<EmployeeHome/>}/>
