@@ -13,7 +13,7 @@ import Button from "react-bootstrap/Button";
 import dayjs from 'dayjs';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {LocalizationProvider} from "@mui/x-date-pickers";
+import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import Alert from '@mui/material/Alert';
 
 function CustomerOrder() {
@@ -25,8 +25,9 @@ function CustomerOrder() {
     const [pickupTime, setPickupTime] = useState("ASAP"); // State to track pickup time
     const [isTimePickerEnabled, setIsTimePickerEnabled] = useState(false);
     const [selectedTime, setSelectedTime] = useState(dayjs());// State to enable/disable time picker
-    const [alertMessage, setAlertMessage] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
+    const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(false);
 
 
 
@@ -56,7 +57,13 @@ function CustomerOrder() {
     }, [restaurantID, customerID]);
 // Function to add item to the order
     const addToCart = async (menuItem, qty) => {
-        let subtotal = qty * menuItem.price
+        let subtotal = 0;
+        if (menuItem.on_special){
+            subtotal = qty * menuItem.discount;
+        }
+        else{
+            subtotal = qty * menuItem.price;
+        }
         let item = { "newItem": {
             "menu_ref" : menuItem._id,
                 "name": menuItem.name,
@@ -85,24 +92,44 @@ function CustomerOrder() {
     };
     const removeFromCart = async (menuItem) => {
         await axios.patch(`http://localhost:8000/order/${order._id}/${menuItem._id}`, menuItem)
-            .then(result => setOrder(result.data)).catch(err => console.log(err));
-        //TODO: Check if there are no more items in the order if so delete order from database
+            .then(result => {
+                // Update order state with the updated data
+                setOrder(result.data);
 
-    }
-    const checkout = async () => {
+                // Check if there are no more items in the order, if so, delete the order from the database
+                if (result.data.items.length === 0) {
+                    axios.delete(`http://localhost:8000/order/${order._id}`)
+                        .then(() => {
+                            // If the order is successfully deleted, set the order state to null
+                            setOrder(null);
+                        })
+                        .catch(err => console.log(err));
+                }
+            })
+            .catch(err => console.log(err));
+    };
+    useEffect(() => {
+        const currentTime = dayjs();
+        const adjustedTime = currentTime.subtract(1, 'minutes');
+
+        setIsCheckoutDisabled(selectedTime.isBefore(adjustedTime));
+    }, [selectedTime]);
+    const checkout = () => {
+        //TODO: Check if the order is available because if you have an item added to cart before the restaurant sets to unavaible
         const adjustedTime = dayjs().subtract(5, 'minute')
+        //console.log(selectedTime.)
         if (selectedTime && dayjs(selectedTime).isBefore(adjustedTime)) {
+            console.log("TEST")
             setShowAlert(true);
             setAlertMessage("Pickup time cannot be earlier than the current time")
             // If pickup time is earlier than the current time, show an error message or handle it accordingly
             //alert("Pickup time cannot be earlier than the current time");
         }else {
             setShowAlert(false)
-            await axios.patch(`http://localhost:8000/order/${order._id}`,
-                {"status": "ordered", "pickup_time": (selectedTime.format("HH:mm"))})
+            axios.patch(`http://localhost:8000/order/${order._id}`,
+                {"status": "ordered", "pickup_time": (selectedTime.format("YYYYMMDDHHmm").toString())})
             setCheckoutModalIsOpen(false);
             setOrder(null);
-            //
         }
         //console.log(JSON.stringify(order))
     }
@@ -118,6 +145,10 @@ function CustomerOrder() {
 
     const closeCheckoutModal = () => {
         setCheckoutModalIsOpen(false);
+        setPickupTime("ASAP");
+        setSelectedTime(dayjs())
+        setIsTimePickerEnabled(false);
+
     };
     const handleRadioChange = (event) => {
         const selectedValue = event.target.value;
@@ -127,19 +158,20 @@ function CustomerOrder() {
         // If "ASAP" is selected, set the selectedTime to dayjs() immediately
         if (selectedValue === "ASAP") {
             setSelectedTime(dayjs());
+            setShowAlert(false);
         }
     };
 
 
     return (
-        <div className='h-dvh'>
+        <div className='h-dvh '>
             <CustomerNavBar />
             <div className="flex flex-row justify-content-around">
-                <div className="h-dvh overflow-auto" style={{ maxWidth: '600px', height: '562px' }}>
+                <div className="h-dvh" style={{ maxWidth: '600px', height: '562px' }}>
                     <OrderMenuCardListCustomerComp menu={menu} addToCart={addToCart} />
                 </div>
                 <div className="justify-content-end">
-                    <CartCustomerComp order={order} removeFromCart={removeFromCart} openCheckoutModal={openCheckoutModal}/>
+                    <CartCustomerComp  order={order} removeFromCart={removeFromCart} openCheckoutModal={openCheckoutModal}/>
                 </div>
                 <div>
                     {order && (
@@ -150,7 +182,7 @@ function CustomerOrder() {
                                        margin: 'auto',
                                        borderRadius: '8px',
                                        padding: '20px',
-                                       height: '460px'
+                                       height: '480px'
                                    }
                                }}>
                             <div className="flex justify-content-between flex-column align-items-center ">
@@ -175,7 +207,7 @@ function CustomerOrder() {
                                         </tbody>
                                     </table>
                                 </div>
-                                <h2>Order Total: ${order.total}</h2>
+                                <h2 className="font-bold">Order Total: ${order.total}</h2>
                                 <div>
                                     <FormLabel>Pickup Time</FormLabel>
                                     <RadioGroup
@@ -189,16 +221,15 @@ function CustomerOrder() {
                                         <FormControlLabel value="Set Pickup Time" control={<Radio/>} label="Set Pickup Time"/>
                                     </RadioGroup>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DesktopTimePicker
+                                        <DateTimePicker
                                             disabled={!isTimePickerEnabled}
                                             value={selectedTime}
                                             onChange={handleTimeChange}
-                                            minTime={dayjs()}
+                                            minTime={dayjs().subtract(1, "minutes")}
                                         />
                                     </LocalizationProvider>
                                 </div>
-                                {showAlert && <Alert severity="error">{alertMessage}</Alert>}
-                                <Button onClick={checkout}>Checkout</Button>
+                                <button className="btn mt-2" onClick={checkout} disabled={isCheckoutDisabled} >Checkout</button>
                             </div>
                         </Modal>
                     )}
