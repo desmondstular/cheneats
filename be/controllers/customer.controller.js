@@ -79,3 +79,16 @@ export const createCustomer = async(req, res, next) => {
 		next(e);
 	}
 }
+
+/**
+ * Gets a customer by email.
+ */
+export const getCustomerByEmail = async(req, res, next) => {
+	const {email} = req.query;
+	try {
+		const customer = await getCustomerFromRepo({email: email});
+		res.status(200).send(customer);
+	} catch (e) {
+		next(e);
+	}
+}
