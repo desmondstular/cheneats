@@ -22,7 +22,7 @@ export const OrderMenuCardCustomerComp = ({ menuItem, addToCart }) => {
     };
 
     return (
-        <Card style={{ margin: '2px' }}>
+        <Card style={{ margin: '2px', opacity: menuItem.available ? 1 : 0.5  }}>
             <Card.Body style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
                 <Card.Img src={menuItem.image} style={{ height: '80px', width: '80px' }} />
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -30,14 +30,14 @@ export const OrderMenuCardCustomerComp = ({ menuItem, addToCart }) => {
                     <Card.Text>${menuItem.price}</Card.Text>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-                    <Button variant="dark" style={{ height: '40px', width: '40px', marginRight: '4px' }} onClick={decreaseQty}>-</Button>
+                    <Button disabled={!menuItem.available} variant="dark" style={{ height: '40px', width: '40px', marginRight: '4px' }} onClick={decreaseQty}>-</Button>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginLeft: '10px' }}>
                         <Card.Text>{qty}</Card.Text>
                     </div>
-                    <Button variant="dark" style={{ height: '40px', width: '40px', marginLeft: '12px' }} onClick={increaseQty}>+</Button>
+                    <Button variant="dark" disabled={!menuItem.available}style={{ height: '40px', width: '40px', marginLeft: '12px' }} onClick={increaseQty}>+</Button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginLeft: '8px' }}>
-                    <Button variant="dark" onClick={handleAddToCart}>Add to Cart</Button>
+                    <Button variant="dark" onClick={handleAddToCart} disabled={!menuItem.available}>Add to Cart</Button>
                 </div>
             </Card.Body>
         </Card>

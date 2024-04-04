@@ -2,7 +2,7 @@ import React from 'react';
 import {IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const CartCustomerComp = ({ order, removeFromCart }) => {
+const CartCustomerComp = ({ order, removeFromCart, openCheckoutModal}) => {
     if (!order) {
         order = {
             "items":[],
@@ -26,7 +26,7 @@ const CartCustomerComp = ({ order, removeFromCart }) => {
                 ))}
                 Total: ${order.total.toFixed(2)}
                 <div className="flex card-actions justify-center flex-column align-content-center">
-                    <button className="btn">CheckOut</button>
+                    <button className="btn" onClick={openCheckoutModal}>CheckOut</button>
                 </div>
             </div>
         </div>
