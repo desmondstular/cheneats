@@ -150,3 +150,10 @@ export const getOrdersByCustomerPopulated = async (query) => {
 		throw e;
 	}
 }
+export const getCartedOrdersByCustomerIdRepo = async (query) => {
+    try {
+        return await Order.find(query)
+    } catch (e) {
+        throw e;
+    }
+}

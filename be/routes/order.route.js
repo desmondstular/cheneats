@@ -15,7 +15,8 @@ import {
     getOrder,
     getOrders,
     removeItemFromOrder,
-    updateOrder
+    updateOrder,
+    getCartedOrdersByCustomerId
 } from "../controllers/order.controller.js";
 
 const router = express.Router();
@@ -23,7 +24,7 @@ const router = express.Router();
 // Route for joining orders, customers, restaurants
 router.get("/byrestaurant/:restaurant_ref", getOrderByRestaurantFull);
 router.get("/bycustomer/:customer_ref", getOrderByCustomerFull);
-
+router.get("/carted/:customer_ref", getCartedOrdersByCustomerId);
 router.get("/", getOrders);			// get all orders
 router.get("/:id", getOrder);			// get Order by id
 router.post("/", createOrder); // create new Order

@@ -68,6 +68,7 @@ function Login () {
 				const {data} = await axios.get(customerURL, {params: {email: loginValue}});
 				if (data.length !== 0) {
 					Cookies.set('customerID', data[0]._id);
+					setCustomerID(data[0]._id);
 					navigate('/customerHome', {replace: true});
 				}
 				else {

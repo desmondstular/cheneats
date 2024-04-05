@@ -1,10 +1,18 @@
-import React from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import React, {useContext, useEffect, useState} from 'react';
+import {Link, useNavigate, useParams} from "react-router-dom";
 import Cookies from "js-cookie";
 import UserIcon from '../../icons/user.png';
+import {ThemeContext} from "../../.store/ThemeContext.jsx";
+import axios from "axios";
+import {OrderMenuCardCustomerComp} from "./orderView/ordermenucard.customer.comp.jsx";
+import Card from "@mui/material/Card";
 
 const CustomerNavBar = () => {
 	const navigate = useNavigate();
+	const [cartedOrders, setCartedOrders] = useState([]);
+	const [cartedRestaurants, setCartedRestaurants] = useState([]);
+	const {customerID} = useContext(ThemeContext);
+	const {restaurantId} = useParams();
 
 	const onClickLogout = () => {
 		Cookies.remove('employeeID');
@@ -12,7 +20,33 @@ const CustomerNavBar = () => {
 		Cookies.remove('customerID');
 		navigate('/', {replace: true});
 	}
+	useEffect(() => {
+		console.log("Test")
+		if (customerID !== '') {
+			axios.get(`http://localhost:8000/order/carted/${customerID}`)
+				.then(result => {
+					setCartedOrders(result.data);
+					const promises = result.data.map(order =>
+						axios.get(`http://localhost:8000/restaurant/${order.restaurant_ref}`)
+					);
+					Promise.all(promises)
+						.then(responses => {
 
+							const restaurants = responses.map(response => response.data[0]);
+							console.log("Restaurant Name" + JSON.stringify(restaurants))
+							setCartedRestaurants(restaurants);
+							console.log("Carted Rests: " +  JSON.stringify(cartedRestaurants));
+							console.log("Carted Rests: " + JSON.stringify(cartedRestaurants.length));
+						})
+						.catch(err => console.log(err));
+				})
+				.catch(err => console.log(err));
+
+		}
+	}, [customerID, restaurantId]);
+	// useEffect(() => {
+	// 	console.log("Carted Rests: " +  JSON.stringify(cartedRestaurants));
+	// },[cartedRestaurants]);
     return (
 		<div className="navbar h-19 shadow-md bg-white">
 			<div className='flex-1'>
@@ -40,18 +74,26 @@ const CustomerNavBar = () => {
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
 										  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
 								</svg>
-								<span className="badge badge-sm indicator-item">8</span>
+								<span className="badge badge-sm indicator-item">{cartedRestaurants.length}</span>
 							</div>
 						</div>
 						<div tabIndex={0}
 							 className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
 							<div className="card-body">
-								<span className="font-bold text-lg">8 Items</span>
-								<span className="text-info">Subtotal: $999</span>
-								<div className="card-actions">
-									<button className="btn btn-primary btn-block">View cart</button>
-								</div>
+								{cartedRestaurants.length > 0 ? (
+									<>
+										<h1 className="font-bold">Carted Orders</h1>
+										{cartedRestaurants.map((restaurant, index) => (
+											<Link to={`http://localhost:5173/customerOrder/${restaurant._id}`} key={index}>
+												{restaurant.name}
+											</Link>
+										))}
+									</>
+								) : (
+									<p>No Carted Orders</p>
+								)}
 							</div>
+
 						</div>
 					</div>
 					<div className="dropdown dropdown-end">
