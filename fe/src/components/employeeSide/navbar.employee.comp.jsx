@@ -21,8 +21,8 @@ const EmployeeNavBar = () => {
 			<div className='flex-1'>
 				<a className='flex items-center gap-2'>
 					<div className="w-14 rounded-full drop-shadow-xl">
-						<img alt="Tailwind CSS Navbar component"
-							 src="https://cdn.discordapp.com/attachments/1197608255724191907/1220112755114381332/chen-transparent-cropped.png?ex=660dc18d&is=65fb4c8d&hm=b7915afbbe613aa60741c9025d6fe3563762eebe711592f3e2297f48a79f9f2f&"/>
+						<img alt="ChenEats Logo"
+							 src="chen-transparent-cropped.png"/>
 					</div>
 					<p className="text-2xl"><b>ChenEats</b></p>
 				</a>
