@@ -92,6 +92,7 @@ function Login () {
 
     return (
         <div className="flex flex-col vh-100 justify-content-center align-items-center">
+			<img src="chen-transparent-cropped.png" alt="Chen logo" className='h-auto max-h-72'/>
 			<p className='text-6xl text-gray-900 font-semibold mb-4'>ChenEats</p>
 			<div className='card w-96 pt-8 pl-8 pr-8 pb-2'>
 				<div>
