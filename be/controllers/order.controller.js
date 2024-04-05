@@ -6,12 +6,12 @@
 import {
     addItemToOrderRepo,
     removeItemFromOrderRepo,
-	createOrderInRepo,
-	deleteOrderFromRepo,
-	getOrderFromRepo,
+    createOrderInRepo,
+    deleteOrderFromRepo,
+    getOrderFromRepo,
     getOrdersByCustomerPopulated,
     getOrdersByRestaurantPopulated,
-	updateOrderInRepo
+    updateOrderInRepo, getCartedOrdersByCustomerIdRepo
 
 } from "../repos/order.repo.js";
 import mongoose from "mongoose";
@@ -163,4 +163,16 @@ export const getOrderByCustomerFull = async(req, res, next) => {
 	} catch (e) {
 		next(e);
 	}
+}
+export const getCartedOrdersByCustomerId = async (req, res, next) => {
+    const { customer_ref } = req.params;
+    try {
+        const orders = await getCartedOrdersByCustomerIdRepo({
+            "customer_ref": customer_ref,
+            "status": "carted"
+        });
+        res.status(200).send(orders);
+    } catch (e) {
+        next(e);
+    }
 }
