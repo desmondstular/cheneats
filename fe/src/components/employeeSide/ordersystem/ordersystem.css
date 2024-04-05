@@ -1,0 +1,8 @@
+.timeline-item {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.timeline-item.active {
+    opacity: 1;
+}
