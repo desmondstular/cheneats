@@ -110,6 +110,7 @@ function Login () {
 				</div>
 			</div>
 			<div className="w-72 bg-white rounded p-3 m-16">
+				<p><i>Buttons only exist for developer mode</i></p>
 				<div className="btn-group">
 					<button className='btn btn-secondary rounded-end' onClick={onClickCustomer}> Customer Homepage
 					</button>

@@ -35,16 +35,26 @@ const EmployeeHome = () => {
 	}, []);
 
 	useEffect(() => {
-		if (restaurantID !== '') {
-			axios.get(orderURL)
-				.then(result => (
-					setOrders(result.data.filter(function( obj ) {
-						return obj.status !== 'carted' && obj.status !== 'completed'
-					}))
-				))
-				.catch(err => console.log(err));
-			console.log(orders);
-		}
+		const fetchData = () => {
+			if (restaurantID !== '') {
+				axios.get(orderURL)
+					.then(result => (
+						setOrders(result.data.filter(function( obj ) {
+							return obj.status !== 'carted' && obj.status !== 'completed'
+						}))
+					))
+					.catch(err => console.log(err));
+			}
+		};
+
+		// Fetch data initially
+		fetchData();
+
+		// Fetch data every 30 seconds
+		const interval = setInterval(fetchData, 30000);
+
+		// Clean up interval on component unmount
+		return () => clearInterval(interval);
 	}, [restaurantID, update]);
 
 	useEffect(() => {
@@ -81,26 +91,45 @@ const EmployeeHome = () => {
 	/**
 	 * Next button onClick handler. Progresses status of order.
 	 */
+	// const nextButtonClick = async () => {
+	// 	try {
+	// 		const status = orders[activeOrder].status;
+	// 		const statusNum = timelineMappings[status];
+	// 		if (statusNum < 3) {
+	// 			const obj = {_id: orders[activeOrder]._id, status: statusMapping[statusNum+1]};
+	// 			await axios.patch(patchOrderURL + orders[activeOrder]._id, obj);
+	// 			// Update timelineMappings object
+	// 			const newStatusNum = statusNum + 1;
+	// 			setStatusTimeline(newStatusNum);
+	// 			timelineMappings[status] = newStatusNum;
+	// 		} else {
+	//
+	// 		}
+	// 	} catch (e) {
+	// 		console.log(e);
+	// 	}
+	// 	setUpdate(update+1);
+	// }
+
 	const nextButtonClick = async () => {
-		try {
-			const status = orders[activeOrder].status;
-			const statusNum = timelineMappings[status];
-			if (statusNum < 4) {
+			try {
+				const status = orders[activeOrder].status;
+				const statusNum = timelineMappings[status];
 				const obj = {_id: orders[activeOrder]._id, status: statusMapping[statusNum+1]};
 				await axios.patch(patchOrderURL + orders[activeOrder]._id, obj);
-			}
-			else {
-				setActiveOrder(activeOrder+1);
-			}
-		} catch (e) {
-			console.log(e);
-		}
-		setUpdate(update+1);
-	}
 
-	if (orders.length !== 0) {
+				// Update timelineMappings object
+				const newStatusNum = statusNum + 1;
+				setStatusTimeline(newStatusNum);
+				timelineMappings[status] = newStatusNum;
+			} catch (e) {
+				console.log(e);
+			}
+			setUpdate(update+1);
+		}
+
 		return (
-			<div className='flex flex-col gap-3 vh-100 overscroll-none'>
+			<div className='flex flex-col gap-3'>
 				<div className="sticky h-19" style={{zIndex: 9999}}>
 					<EmployeeNavBar></EmployeeNavBar>
 				</div>
@@ -109,6 +138,7 @@ const EmployeeHome = () => {
 						<div className='card card-bordered min-w-48 max-w-96 flex-grow drop-shadow-sm'>
 							<p className='text-xl rounded-t-lg font-semibold pt-3 pb-3 bg-base-200'>Order
 								Information</p>
+							{orders.length > 0 && (
 							<div className='text-left pl-4 pr-4 pt-2'>
 								<p className="mb-2"><span
 									className="font-semibold">Customer:</span> {orders[activeOrder].customer_ref.name}
@@ -137,7 +167,7 @@ const EmployeeHome = () => {
 										</p>
 									</AccordionDetails>
 								</Accordion></p>
-							</div>
+							</div>)}
 						</div>
 						<div
 							className='card card-bordered flex flex-row justify-items-center min-w-72 flex-grow bg-white drop-shadow-sm'>
@@ -163,9 +193,21 @@ const EmployeeHome = () => {
 									))}
 								</ul>
 							</div>
-							<button
-								className='bg-base-200 rounded-r-2xl flex justify-center align-items-center justify-items-center hover:bg-base-300 w-32 h-full'
-								onClick={nextButtonClick}>
+							<button className='bg-base-200 rounded-r-2xl flex justify-center align-items-center justify-items-center hover:bg-base-300 w-32 h-full'
+									onClick={statusTimeline < 3 ? nextButtonClick : ()=>document.getElementById('my_modal_1').showModal()}>
+								<dialog id="my_modal_1" className="modal">
+									<div className="modal-box">
+										<h3 className="font-bold text-lg">Confirm</h3>
+										<p className="py-4">Are you sure you want to mark the order as completed?</p>
+										<div className="modal-action">
+											<form method="dialog">
+												<button className="btn btn-error b w-24">Cancel</button>
+												<button className="btn btn-info no-animation ml-4 w-24" onClick={nextButtonClick}>Confirm
+												</button>
+											</form>
+										</div>
+									</div>
+								</dialog>
 								Next
 								<svg className="h-6 w-6 fill-current md:h-8 md:w-8"
 									 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -178,22 +220,12 @@ const EmployeeHome = () => {
 							<ItemList orders={orders} active={activeOrder}/>
 						</div>
 					</div>
-					<div className='card card-bordered mt-3 rounded overflow-auto h-1/4'>
+					<div className='card card-bordered mt-3 rounded overflow-auto h-1/3 mb-3'>
 						<LiveOrderTable orders={orders} active={activeOrder} handler={onClickTableOrder}/>
 					</div>
 				</div>
 			</div>
 		)
-	}
-	else {
-		return (
-			<div className='flex flex-col gap-3 vh-100'>
-				<div className="sticky h-19" style={{zIndex: 9999}}>
-					<EmployeeNavBar></EmployeeNavBar>
-				</div>
-			</div>
-		)
-	}
 }
 
 export default EmployeeHome;

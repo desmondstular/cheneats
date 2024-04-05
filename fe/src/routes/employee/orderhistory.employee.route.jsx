@@ -24,7 +24,7 @@ const EmployeeOrderHistory = () => {
 	}, [restaurantID]);
 
 	return (
-		<div className='flex flex-col gap-3'>
+		<div className='flex flex-col gap-3 vh-100'>
 			<EmployeeNavBar/>
 			<p className="text-3xl font-semibold tracking-wide">Order History</p>
 			<EmployeeOrderHistoryTable

@@ -52,7 +52,7 @@ const CustomerNavBar = () => {
 			<div className='flex-1'>
 				<a className='flex items-center gap-2'>
 					<div className="w-14 rounded-full drop-shadow-xl">
-						<img alt="Tailwind CSS Navbar component"
+						<img alt="ChenEats Logo"
 							 src="chen-transparent-cropped.png"/>
 					</div>
 					<p className="text-2xl"><b>ChenEats</b></p>
