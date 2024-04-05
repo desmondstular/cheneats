@@ -18,7 +18,7 @@ export const LiveOrderTable = ({ orders, active, handler }) => {
 						<div className={`h-24 text-lg flex items-center justify-between px-4 ${active === index ? 'bg-blue-50' : ''}`}>
 							<div className="flex-1">{index + 1}</div>
 							<div className="flex-1">
-								<span className={`h-8 w-32 font-extrabold badge badge-md ${order.status === 'completed' ? "bg-green-500" : "badge-error"}`}>{order.status}</span>
+								<span className={`h-8 w-32 font-extrabold badge badge-md ${order.status === 'ordered' ? "badge-error" : "bg-chen-blue"}`}>{order.status}</span>
 							</div>
 							<div className="flex-1">
 								<div className="font-semibold">{order.customer_ref.name}</div>

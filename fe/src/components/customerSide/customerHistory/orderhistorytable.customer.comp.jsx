@@ -83,7 +83,7 @@ const CustomerOrderHistoryTable = ({ orders }) => {
 										<p>Location: {order.restaurant_ref.location}</p>
 										<p>Pickup Time: {order.pickup_time}</p>
 										<p>Status: {order.status}</p>
-										<p>Fulfilled by: {order.staff_ref ? order.staff_ref.name : 'undefined'}</p>
+										{/*<p>Fulfilled by: {order.staff_ref ? order.staff_ref.name : 'undefined'}</p>*/}
 									</div>
 									<div className="justify-center">
 										<div className="modal-action">
