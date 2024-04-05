@@ -28,7 +28,7 @@ const CustomerOrderHistory = () => {
 	}, [customerID]);
 
 	return (
-		<div className='flex flex-col gap-3'>
+		<div className='vh-100 flex flex-col gap-3'>
 			<CustomerNavBar/>
 			<p className='h1'>Order History</p>
 			<CustomerOrderHistoryTable orders={orders}/>
