@@ -169,39 +169,32 @@ function CustomerOrder() {
 
 
     return (
-        <div className="vh-100">
+        <div className="vh-100 justify-center">
             <CustomerNavBar />
-            <div className="flex flex-row justify-content-around">
+            <div className="flex flex-row pl-28 vh-100">
                 <div>
                     {restaurant && (
-                        <CardMedia component="img" img={restaurant.image} alt={restaurant.name}/>
+                        <CardMedia component="img" image={restaurant.image} alt={restaurant.name}
+                                   style={{ maxWidth: 200, maxHeight: 200, width: 'auto', height: 'auto', marginTop: '35px', borderRadius: '10px'}}/>
                     )}
                 </div>
-                <div className="h-dvh" style={{maxWidth: '600px', height: '562px'}}>
+                <div className="h-dvh vh-100" style={{maxWidth: '800px', height: '562px'}}>
                     <OrderMenuCardListCustomerComp menu={menu} addToCart={addToCart} />
                 </div>
-                <div className="justify-content-end">
+                <div className="vh-100">
                     <CartCustomerComp  order={order} removeFromCart={removeFromCart} openCheckoutModal={openCheckoutModal}/>
                 </div>
-                <div>
+                <div className="vh-100">
                     {order && (
                         <Modal isOpen={checkoutModalIsOpen} onRequestClose={closeCheckoutModal} contentLabel="Checkout"
-                               style={{
-                                   content: {
-                                       width: '400px',
-                                       margin: 'auto',
-                                       borderRadius: '8px',
-                                       padding: '20px',
-                                       height: '480px'
-                                   }
-                               }}>
-                            <div className="flex justify-content-between flex-column align-items-center ">
+                               >
+                            <div className="vh-100">
                                 <h1> My Order</h1>
-                                <div className="h-40 overflow-x-auto">
-                                    <table className='table drop-shadow-md'>
+                                <div className="vh-100">
+                                    <table className=''>
                                         <thead>
-                                        <tr className="text-sm">
-                                            <th className='bg-blue-300'>Item Name</th>
+                                        <tr className="">
+                                            <th className=''>Item Name</th>
                                             <th>Quantity</th>
                                             <th>Subtotal</th>
                                         </tr>
@@ -218,7 +211,7 @@ function CustomerOrder() {
                                     </table>
                                 </div>
                                 <h2 className="font-bold">Order Total: ${order.total}</h2>
-                                <div>
+                                <div className="vh-100">
                                     <FormLabel>Pickup Time</FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -239,7 +232,9 @@ function CustomerOrder() {
                                         />
                                     </LocalizationProvider>
                                 </div>
+                                <div className="vh-100">
                                 <button className="btn mt-2" onClick={checkout} disabled={isCheckoutDisabled} >Checkout</button>
+                            </div>
                             </div>
                         </Modal>
                     )}
