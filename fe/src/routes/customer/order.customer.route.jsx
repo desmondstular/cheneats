@@ -169,32 +169,40 @@ function CustomerOrder() {
 
 
     return (
-        <div className="vh-100 justify-center">
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden' }}>
             <CustomerNavBar />
-            <div className="flex flex-row pl-28 vh-100">
-                <div>
+            <div className="flex flex-row pl-28 vh-100" style={{backgroundColor: '#BFFEF7', overflowY: 'auto' }}>
+                <div className="pr-48">
                     {restaurant && (
                         <CardMedia component="img" image={restaurant.image} alt={restaurant.name}
-                                   style={{ maxWidth: 200, maxHeight: 200, width: 'auto', height: 'auto', marginTop: '35px', borderRadius: '10px'}}/>
+                                   style={{ maxWidth: 200, maxHeight: 200, width: 'auto', height: 'auto', marginTop: '35px', borderRadius: '10px', position: 'fixed'}}/>
                     )}
                 </div>
-                <div className="h-dvh vh-100" style={{maxWidth: '800px', height: '562px'}}>
+                <div className="h-dvh" style={{maxWidth: '800px', height: '562px'}}>
                     <OrderMenuCardListCustomerComp menu={menu} addToCart={addToCart} />
                 </div>
-                <div className="vh-100">
+                <div className="justify-content-end" style={{backgroundColor: '#BFFEF7 ' }}>
                     <CartCustomerComp  order={order} removeFromCart={removeFromCart} openCheckoutModal={openCheckoutModal}/>
                 </div>
-                <div className="vh-100">
+                <div>
                     {order && (
                         <Modal isOpen={checkoutModalIsOpen} onRequestClose={closeCheckoutModal} contentLabel="Checkout"
-                               >
-                            <div className="vh-100">
+                               style={{
+                                   content: {
+                                       width: '400px',
+                                       margin: 'auto',
+                                       borderRadius: '8px',
+                                       padding: '20px',
+                                       height: '480px'
+                                   }
+                               }}>
+                            <div className="flex justify-content-between flex-column align-items-center ">
                                 <h1> My Order</h1>
-                                <div className="vh-100">
-                                    <table className=''>
+                                <div className="h-40 overflow-x-auto">
+                                    <table className='table drop-shadow-md'>
                                         <thead>
-                                        <tr className="">
-                                            <th className=''>Item Name</th>
+                                        <tr className="text-sm">
+                                            <th className='bg-blue-300'>Item Name</th>
                                             <th>Quantity</th>
                                             <th>Subtotal</th>
                                         </tr>
@@ -211,7 +219,7 @@ function CustomerOrder() {
                                     </table>
                                 </div>
                                 <h2 className="font-bold">Order Total: ${order.total}</h2>
-                                <div className="vh-100">
+                                <div>
                                     <FormLabel>Pickup Time</FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -232,9 +240,7 @@ function CustomerOrder() {
                                         />
                                     </LocalizationProvider>
                                 </div>
-                                <div className="vh-100">
                                 <button className="btn mt-2" onClick={checkout} disabled={isCheckoutDisabled} >Checkout</button>
-                            </div>
                             </div>
                         </Modal>
                     )}
