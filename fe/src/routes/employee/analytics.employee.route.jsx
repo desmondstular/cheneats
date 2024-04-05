@@ -13,6 +13,8 @@ const EmployeeAnalytics = () => {
     const navigate = useNavigate();
     const [totalIncome, setTotalIncome] = useState(0);
 	const [itemsOrdered, setItemsOrdered] = useState({});
+    //const [filteredOrders, setFilteredOrdered] = useState({});
+    const [selectedFilter, setSelectedFilter] = useState('All Time'); // State to track selected filter
     const [orderTimeCategories, setOrderTimeCategories] = useState({
         breakfast: 0,
         lunch: 0,
@@ -41,25 +43,112 @@ const EmployeeAnalytics = () => {
         axios.get(`http://localhost:8000/order/byrestaurant/${restaurantID}`)
             .then(response => {
                 const completedOrders = response.data.filter(order => order.status === 'completed');
-                console.log(JSON.stringify(completedOrders))
-                const income = completedOrders.reduce((total, order) => total + order.total, 0);
-                setTotalIncome(income);
-                countMenuItems(completedOrders);
-
-                // Loop through each completed order
-                completedOrders.forEach(order => {
-                    
-                    const pickupTime = parseInt(order.pickup_time.slice(-4));
-                    console.log("pickup time: " + pickupTime)
-                    if (pickupTime >= 500 && pickupTime <= 1159) {
-                        orderTimes.breakfast++;
-                    } else if (pickupTime >= 1200 && pickupTime <= 1659) {
-                        orderTimes.lunch++;
-                    } else {
-                        orderTimes.dinner++;
+                if (selectedFilter === 'Daily'){
+                    const today = new Date();
+                    const currentYear = today.getFullYear().toString();
+                    if ((today.getMonth() + 1).toString().length === 1){
+                        var month = "0" + (today.getMonth() + 1).toString()
                     }
-                });
-                setOrderTimeCategories(orderTimes)
+                    else{
+                        var month = (today.getMonth() + 1).toString()
+                    }
+                    if ((today.getDate().toString()).length === 1){
+                        var day = "0" + (today.getDate().toString())
+                    }
+                    else{
+                        var day = (today.getDate().toString())
+                    }
+                    const currentDayOfYear = currentYear + month + day
+                    const filteredOrders = completedOrders.filter(order => order.pickup_time.slice(0, 8) === currentDayOfYear)
+                    const income = filteredOrders.reduce((total, order) => total + order.total, 0);
+                    setTotalIncome(income);
+                    countMenuItems(filteredOrders);
+                    console.log(JSON.stringify(filteredOrders))
+                    filteredOrders.forEach(order => {
+                        const pickupTime = parseInt(order.pickup_time.slice(-4));
+                        console.log("pickup time: " + order.pickup_time)
+                        if (pickupTime >= 500 && pickupTime <= 1159) {
+                            orderTimes.breakfast++;
+                        } else if (pickupTime >= 1200 && pickupTime <= 1659) {
+                            orderTimes.lunch++;
+                        } else {
+                            orderTimes.dinner++;
+                        }
+                    });
+                    setOrderTimeCategories(orderTimes)
+                }
+                else if (selectedFilter === 'Monthly') {
+                    const today = new Date();
+                    const currentYear = today.getFullYear().toString();
+                    if ((today.getMonth() + 1).toString().length === 1){
+                        var month = "0" + (today.getMonth() + 1).toString()
+                    }
+                    else{
+                        var month = (today.getMonth() + 1).toString()
+                    }
+                    const currentMonth = currentYear + month
+                    const filteredOrders = completedOrders.filter(order => order.pickup_time.slice(0, 6) === currentMonth)
+                    const income = filteredOrders.reduce((total, order) => total + order.total, 0);
+                    setTotalIncome(income);
+                    countMenuItems(filteredOrders);
+                    console.log(JSON.stringify(filteredOrders))
+                    filteredOrders.forEach(order => {
+                        const pickupTime = parseInt(order.pickup_time.slice(-4));
+                        console.log("pickup time: " + order.pickup_time)
+                        if (pickupTime >= 500 && pickupTime <= 1159) {
+                            orderTimes.breakfast++;
+                        } else if (pickupTime >= 1200 && pickupTime <= 1659) {
+                            orderTimes.lunch++;
+                        } else {
+                            orderTimes.dinner++;
+                        }
+                    });
+                    setOrderTimeCategories(orderTimes)
+                }
+                else if (selectedFilter === 'Yearly') {
+                    const today = new Date();
+                    const currentYear = today.getFullYear().toString();
+                    if ((today.getMonth() + 1).toString().length === 1){
+                        var month = "0" + (today.getMonth() + 1).toString()
+                    }
+                    else{
+                        var month = (today.getMonth() + 1).toString()
+                    }
+                    const filteredOrders = completedOrders.filter(order => order.pickup_time.slice(0, 4) === currentYear)
+                    const income = filteredOrders.reduce((total, order) => total + order.total, 0);
+                    setTotalIncome(income);
+                    countMenuItems(filteredOrders);
+                    console.log(JSON.stringify(filteredOrders))
+                    filteredOrders.forEach(order => {
+                        const pickupTime = parseInt(order.pickup_time.slice(-4));
+                        console.log("pickup time: " + order.pickup_time)
+                        if (pickupTime >= 500 && pickupTime <= 1159) {
+                            orderTimes.breakfast++;
+                        } else if (pickupTime >= 1200 && pickupTime <= 1659) {
+                            orderTimes.lunch++;
+                        } else {
+                            orderTimes.dinner++;
+                        }
+                    });
+                    setOrderTimeCategories(orderTimes)
+                }
+                else {
+                    const income = completedOrders.reduce((total, order) => total + order.total, 0);
+                    setTotalIncome(income);
+                    countMenuItems(completedOrders);
+                    completedOrders.forEach(order => {
+                        const pickupTime = parseInt(order.pickup_time.slice(-4));
+                        console.log("pickup time: " + order.pickup_time)
+                        if (pickupTime >= 500 && pickupTime <= 1159) {
+                            orderTimes.breakfast++;
+                        } else if (pickupTime >= 1200 && pickupTime <= 1659) {
+                            orderTimes.lunch++;
+                        } else {
+                            orderTimes.dinner++;
+                        }
+                    });
+                    setOrderTimeCategories(orderTimes)
+                }
             })
 
             .catch(error => {
@@ -135,9 +224,39 @@ const EmployeeAnalytics = () => {
         }
     };
 
+    const handleFilterChange = (event) => {
+        setSelectedFilter(event.target.value);
+    };
+
+    const triggerFilter = () => {
+        console.log(selectedFilter)
+        fetchTotalIncome();
+    }
+
     return (
         <div>
             <EmployeeNavBar />
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col flex items-center justify-center">
+                <div className="flex items-center space-x-4">
+                    <label className="mr-2">Filter:</label>
+                    <select
+                        className="border rounded-md px-2 py-1"
+                        value={selectedFilter}
+                        onChange={handleFilterChange}
+                    >
+                        <option value="All Time">All Time</option>
+                        <option value="Daily">Daily</option>
+                        <option value="Monthly">Monthly</option>
+                        <option value="Yearly">Yearly</option>
+                    </select>
+                    <button
+                        onClick={() => triggerFilter()}
+                        class="h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-green-500 hover:bg-green-600 rounded-lg focus:shadow-outline"
+                    >
+                        Apply Filter
+                    </button>
+                </div>
+            </div>
             <div className="min-w-screen flex flex-col min-h-screen flex items-center justify-center px-5 py-5">
                 <div className="bg-slate-50 text-black-500 rounded shadow-xl py-5 px-5 ">
                     <div className="flex w-full">
