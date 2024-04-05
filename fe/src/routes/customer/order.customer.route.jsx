@@ -15,6 +15,7 @@ import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import Alert from '@mui/material/Alert';
+import CardMedia from "@mui/material/CardMedia";
 
 function CustomerOrder() {
     const [menu, setMenu] = useState([]);
@@ -28,6 +29,7 @@ function CustomerOrder() {
     const [alertMessage, setAlertMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
     const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(false);
+    const [restaurant, setRestaurant] = useState();
 
 
 
@@ -54,6 +56,9 @@ function CustomerOrder() {
                 }
             })
             .catch(err => console.log("Error fetching order:", err));
+        axios.get(`http://localhost:8000/restaurant/${restaurantID}`)
+            .then(result => setRestaurant(result.data[0]))
+            .catch(err => console.log("Error fetching restaurant name", err));
     }, [restaurantID, customerID]);
 // Function to add item to the order
     const addToCart = async (menuItem, qty) => {
@@ -164,10 +169,15 @@ function CustomerOrder() {
 
 
     return (
-        <div className='h-dvh '>
+        <div className="vh-100">
             <CustomerNavBar />
             <div className="flex flex-row justify-content-around">
-                <div className="h-dvh" style={{ maxWidth: '600px', height: '562px' }}>
+                <div>
+                    {restaurant && (
+                        <CardMedia component="img" img={restaurant.image} alt={restaurant.name}/>
+                    )}
+                </div>
+                <div className="h-dvh" style={{maxWidth: '600px', height: '562px'}}>
                     <OrderMenuCardListCustomerComp menu={menu} addToCart={addToCart} />
                 </div>
                 <div className="justify-content-end">
