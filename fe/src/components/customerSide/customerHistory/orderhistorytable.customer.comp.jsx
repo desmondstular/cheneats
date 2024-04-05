@@ -2,6 +2,28 @@
  * orderhistorytable.customer.comp.jsx
  */
 import {orderSort, statusSortBy} from "../../employeeSide/orderhistory/orderhistoryhelpers.employee.js";
+const convertTimeFormat = (timeString) => {
+    // Convert the time string to hours and minutes
+	const year = timeString.substring(0, 4);
+	const month = timeString.substring(4, 6);
+	const day = timeString.substring(6, 8); 
+    const hours = parseInt(timeString.substring(0, 2));
+    const minutes = parseInt(timeString.substring(2, 4));
+
+    // Determine AM or PM
+    const period = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert hours to 12-hour format
+    const hours12 = hours % 12 || 12;
+
+    // Pad minutes with leading zero if needed
+    const paddedMinutes = String(minutes).padStart(2, '0');
+
+    // Construct the formatted time string
+    const formattedTime = `${year}/${month}/${day}/${hours12}:${paddedMinutes} ${period}`;
+
+    return formattedTime;
+};
 
 const CustomerOrderHistoryTable = ({ orders }) => {
 	//Sorts orders by status, shows active at top
@@ -81,7 +103,7 @@ const CustomerOrderHistoryTable = ({ orders }) => {
 									<div>
 										<p>Restaurant: {order.restaurant_ref.name}</p>
 										<p>Location: {order.restaurant_ref.location}</p>
-										<p>Pickup Time: {order.pickup_time}</p>
+										<p>Date Ordered: {convertTimeFormat(order.pickup_time)}</p>
 										<p>Status: {order.status}</p>
 										{/*<p>Fulfilled by: {order.staff_ref ? order.staff_ref.name : 'undefined'}</p>*/}
 									</div>

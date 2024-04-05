@@ -60,7 +60,6 @@ const CustomerNavBar = () => {
 				<div className='flex-1'>
 					<div className='flex justify-center gap-2'>
 						<Link to='/customerhome' className="btn btn-ghost text-md">Home</Link>
-						<Link to='/customerhome' className="btn btn-ghost text-md">Restaurants</Link>
 						<Link to='/customerOrderHistory' className="btn btn-ghost text-md">Order History</Link>
 					</div>
 				</div>
