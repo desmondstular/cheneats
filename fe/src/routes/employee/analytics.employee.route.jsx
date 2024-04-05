@@ -48,10 +48,12 @@ const EmployeeAnalytics = () => {
 
                 // Loop through each completed order
                 completedOrders.forEach(order => {
-                    const pickupTime = parseInt(order.pickup_time); // Assuming pickup_time is string, convert it to integer
-                    if (pickupTime >= 600 && pickupTime <= 1100) {
+                    
+                    const pickupTime = parseInt(order.pickup_time.slice(-4));
+                    console.log("pickup time: " + pickupTime)
+                    if (pickupTime >= 500 && pickupTime <= 1159) {
                         orderTimes.breakfast++;
-                    } else if (pickupTime >= 1101 && pickupTime <= 1700) {
+                    } else if (pickupTime >= 1200 && pickupTime <= 1659) {
                         orderTimes.lunch++;
                     } else {
                         orderTimes.dinner++;
@@ -98,7 +100,7 @@ const EmployeeAnalytics = () => {
     }, [itemsOrdered]);
 
     const data = {
-        labels: ["Breakfast (5am-11am)", "Lunch (11am-4pm)", "Dinner (4pm-11pm)"],
+        labels: ["Breakfast (5:00AM-11:59AM)", "Lunch (12:00PM-4:59PM)", "Dinner (5:00PM-11:59PM)"],
         datasets: [
           {
             label: "Popular Order Times",
@@ -137,21 +139,21 @@ const EmployeeAnalytics = () => {
         <div>
             <EmployeeNavBar />
             <div className="min-w-screen flex flex-col min-h-screen flex items-center justify-center px-5 py-5">
-                <div className="bg-slate-50 text-black-500 rounded shadow-xl py-5 px-5 w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
+                <div className="bg-slate-50 text-black-500 rounded shadow-xl py-5 px-5 ">
                     <div className="flex w-full">
                         <h3 className="text-lg font-semibold leading-tight flex-1">TOTAL INCOME:</h3>
                     </div>
                     <div className="flex w-full">
-                        <h3 className="text-lg font-semibold leading-tight flex-1">${totalIncome.toFixed(2)}</h3>
+                        <h3 className="text-2xl font-bold leading-tight flex-1">${totalIncome.toFixed(2)}</h3>
                     </div>
             </div>
             <div className="p-10">
                 <div className="bg-slate-50 text-black-500 rounded shadow-xl">
-                    <h3 className="text-m text-gray-900 font-bold">Top 5 Items Ordered:</h3>
+                    <h3 className="text-xl text-gray-900 font-bold">Top 5 Items Ordered:</h3>
                     <div className="flex flex-wrap justify-center">
                         {Object.keys(itemsOrdered).map(itemName => (
                             <div key={itemName} className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden m-2">
-                                <h2 className="text-lg font-bold">{itemName}</h2>
+                                <h2 className="text-m font-semibold">{itemName}</h2>
                                 <div className="flex justify-center"> {/* Add this div */}
                                     <img 
                                         className="max-w-full h-auto max-h-40" // Adjust max-h-40 to your preferred maximum height
@@ -160,7 +162,7 @@ const EmployeeAnalytics = () => {
                                     />
                                 </div>
                                 <div className="py-4 px-6">
-                                    <p className="text-sm text-gray-600 font-bold">Total Sold: {itemsOrdered[itemName].count}</p>
+                                    <p className="text-sm text-gray-600 font-semibold">Total Sold: {itemsOrdered[itemName].count}</p>
                                 </div>
                             </div>
                         ))}
@@ -169,7 +171,7 @@ const EmployeeAnalytics = () => {
                 </div>
                 <div className="p-10">
                     <div className="bg-slate-50 text-black-500 rounded shadow-xl ">
-                        <h3 className="text-m text-gray-900 font-bold">Pickup Times Analysis:</h3>
+                        <h3 className="text-xl text-gray-900 font-bold">Pickup Times Analysis:</h3>
                         <div className="p-4" style={{ width: '600px', height: '100%' }}>
                             <Bar data={data} plugins={[ChartDataLabels]} options={options}  />
                         </div>
