@@ -129,7 +129,7 @@ const EmployeeHome = () => {
 		}
 
 		return (
-			<div className='flex flex-col gap-3'>
+			<div className='flex flex-col gap-3 vh-100'>
 				<div className="sticky h-19" style={{zIndex: 9999}}>
 					<EmployeeNavBar></EmployeeNavBar>
 				</div>
@@ -220,7 +220,7 @@ const EmployeeHome = () => {
 							<ItemList orders={orders} active={activeOrder}/>
 						</div>
 					</div>
-					<div className='card card-bordered mt-3 rounded overflow-auto h-1/3 mb-3'>
+					<div className='card card-bordered mt-3 rounded h-1/3 mb-3'>
 						<LiveOrderTable orders={orders} active={activeOrder} handler={onClickTableOrder}/>
 					</div>
 				</div>

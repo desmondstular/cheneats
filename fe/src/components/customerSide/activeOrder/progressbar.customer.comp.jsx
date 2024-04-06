@@ -7,7 +7,7 @@ const ProgressBar = ({ stage }) => {
             return 30; // 0% progress for 'Ordered'
         } else if (stage === 'in-progress') {
             return 65; // 66% progress for 'In-Progress'
-        } else if (stage === 'awaiting pickup') {
+        } else if (stage === 'awaiting pickup' || stage === "awaiting-pickup") {
             return 100; // 100% progress for 'Awaiting Pickup'
         } else {
             return 0; // Default to 0% progress
