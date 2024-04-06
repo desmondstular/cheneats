@@ -17,12 +17,12 @@ import staffRoute from "./routes/staff.route.js";
 
 const port = 8000;
 const app = express();
-app.use(cors())
 
 // Connect to Mongo database
 connectDB();
 
-// Express built in body-parser
+// Express built in middleware
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 

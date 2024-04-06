@@ -1,11 +1,16 @@
+/**
+ * navbar.customer.comp.jsx
+ *
+ * Navigation bar for the customer side of the
+ * application.
+ */
+
 import React, {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from "react-router-dom";
 import Cookies from "js-cookie";
 import UserIcon from '../../icons/user.png';
 import {ThemeContext} from "../../.store/ThemeContext.jsx";
 import axios from "axios";
-import {OrderMenuCardCustomerComp} from "./orderView/ordermenucard.customer.comp.jsx";
-import Card from "@mui/material/Card";
 
 const CustomerNavBar = () => {
 	const navigate = useNavigate();
@@ -44,9 +49,7 @@ const CustomerNavBar = () => {
 
 		}
 	}, [customerID, restaurantId]);
-	// useEffect(() => {
-	// 	console.log("Carted Rests: " +  JSON.stringify(cartedRestaurants));
-	// },[cartedRestaurants]);
+
     return (
 		<div className="navbar h-19 shadow-md bg-white">
 			<div className='flex-1'>

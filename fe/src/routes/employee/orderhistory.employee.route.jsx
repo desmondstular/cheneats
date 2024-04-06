@@ -1,7 +1,9 @@
 /**
  * orderhistory.employee.route.js
  *
- * The order history page for an employee.
+ * The route/page for which displays the order history
+ * for a restaurant that is associated with the employee
+ * logged in.
  */
 
 import EmployeeOrderHistoryTable from "../../components/employeeSide/orderhistory/orderhistorytable.employee.comp.jsx";

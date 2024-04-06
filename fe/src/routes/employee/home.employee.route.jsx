@@ -1,3 +1,8 @@
+/**
+ * Home page for an employee. Contains the order
+ * processing system.
+ */
+
 import {Link, useNavigate} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {ThemeContext} from "../../.store/ThemeContext.jsx";

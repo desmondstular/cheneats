@@ -1,7 +1,7 @@
 /**
  * order.model.js
  *
- * Contains a Mongoose model for a food order.
+ * Contains a Mongoose model for a restaurant order.
  */
 
 import mongoose from "mongoose";

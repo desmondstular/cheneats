@@ -38,9 +38,6 @@ export const getMenu = async (req, res, next) => {
 
 /**
  * Returns menu items from the database for a specific restaurant.
- * @param {Request} req - The request object.
- * @param {Response} res - The response object.
- * @param {NextFunction} next - The next middleware function.
  */
 export const getMenuByRestaurant = async (req, res, next) => {
     const { restaurantId } = req.params;

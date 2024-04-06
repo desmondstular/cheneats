@@ -1,7 +1,8 @@
 /**
  * ThemeContext.jsx
  *
- * Contains state context.
+ * Contains the React context which stores state variables
+ * of restaurant, customer, and employee IDs when logged in.
  */
 import {createContext, useEffect, useState} from "react";
 import Cookies from 'js-cookie';

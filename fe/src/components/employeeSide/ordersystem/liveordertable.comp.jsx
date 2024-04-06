@@ -1,9 +1,11 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from "@mui/material/Typography";
-import {Link} from "react-router-dom";
+/**
+ * liveordertable.comp.jsx
+ *
+ * Shows a table of customer orders for the order
+ * system/employee home page. Allows a employee to click
+ * on table rows and load the order data for processing.
+ */
+
 const convertTimeFormat = (timeString) => {
     // Convert the time string to hours and minutes
 	const year = timeString.substring(0, 4);

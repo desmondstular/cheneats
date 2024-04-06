@@ -1,3 +1,9 @@
+/**
+ * restaurantcardlist.customer.comp.jsx
+ *
+ * A list of restaurant cards.
+ */
+
 import { RestaurantcardCustomerComp } from "./restaurantcard.customer.comp";
 
 export const RestaurantcardlistCustomerComp = ({ restaurants, activeCustomer }) => {

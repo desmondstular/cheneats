@@ -1,3 +1,11 @@
+/**
+ * navbar.employee.comp.jsx
+ *
+ * Navigation bar for the employee the side of the application.
+ * Displays different routes, logout, information edit, and
+ * website logo and name.
+ */
+
 import {Link, useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import UserIcon from '../../icons/user.png';

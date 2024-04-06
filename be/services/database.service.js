@@ -1,7 +1,7 @@
 /**
  * database.service.js
  *
- * Connects to MongoDB.
+ * Connects to the local database (MongoDB).
  */
 
 import mongoose from "mongoose";

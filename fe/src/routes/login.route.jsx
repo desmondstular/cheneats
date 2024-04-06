@@ -1,3 +1,9 @@
+/**
+ * login.route.jsx
+ *
+ * Login page for a customer or employee.
+ */
+
 import React, {useContext, useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";

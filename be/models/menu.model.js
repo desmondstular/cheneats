@@ -1,5 +1,7 @@
 /**
  * menu.model.js
+ *
+ * Mongoose schema for a menu item object.
  */
 
 import mongoose from "mongoose";

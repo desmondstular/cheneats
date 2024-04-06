@@ -1,3 +1,12 @@
+/**
+ * restaurantcard.customer.comp.jsx
+ *
+ * A restaurant card that showing the restaurant
+ * information and logo. Clicking on it redirects
+ * it to the customer order page for that specific
+ * restaurant.
+ */
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';

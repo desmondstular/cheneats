@@ -1,3 +1,9 @@
+/**
+ * home.customer.route.jsx
+ *
+ * Customer home page.
+ */
+
 import {useState, useEffect, useContext} from "react";
 import {RestaurantcardlistCustomerComp} from '../../components/customerSide/restaurantView/restaurantcardlist.customer.comp';
 import ActiveOrder from '../../components/customerSide/activeOrder/activeorder.customer.comp';

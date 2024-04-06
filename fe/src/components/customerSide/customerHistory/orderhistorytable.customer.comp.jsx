@@ -1,6 +1,9 @@
 /**
  * orderhistorytable.customer.comp.jsx
+ *
+ * Shows the order history for a specific customer.
  */
+
 import {orderSort, statusSortBy} from "../../employeeSide/orderhistory/orderhistoryhelpers.employee.js";
 const convertTimeFormat = (timeString) => {
     // Convert the time string to hours and minutes

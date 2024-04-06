@@ -1,3 +1,9 @@
+/**
+ * editprofile.employee.route.jsx
+ *
+ * Page for editing a restaurants information.
+ */
+
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from 'axios';

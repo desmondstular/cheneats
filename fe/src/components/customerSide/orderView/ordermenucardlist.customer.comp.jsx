@@ -1,4 +1,10 @@
-// OrderMenuCardListCustomerComp.jsx
+/**
+ * OrderMenuCardListCustomerComp.jsx
+ *
+ * Shows a list of menu item cards for a customer
+ * to add to their cart.
+ */
+
 import { OrderMenuCardCustomerComp } from './ordermenucard.customer.comp.jsx';
 
 export const OrderMenuCardListCustomerComp = ({ menu, addToCart}) => {

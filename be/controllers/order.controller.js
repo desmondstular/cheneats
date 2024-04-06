@@ -43,6 +43,10 @@ export const getOrder = async (req, res, next) => {
     }
 }
 
+/**
+ * Gets carted order for a specific restaurant
+ * and customer.
+ */
 export const getCartedOrderByCustomerIdRestaurantId = async (req, res, next) => {
     const { restaurant_id, customer_id } = req.params;
     try {
@@ -164,6 +168,11 @@ export const getOrderByCustomerFull = async(req, res, next) => {
 		next(e);
 	}
 }
+
+/**
+ * Gets all orders that have the in cart status for a
+ * specific customer.
+ */
 export const getCartedOrdersByCustomerId = async (req, res, next) => {
     const { customer_ref } = req.params;
     try {

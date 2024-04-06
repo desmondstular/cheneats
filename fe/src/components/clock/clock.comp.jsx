@@ -1,5 +1,7 @@
 /**
  * clock.comp.jsx
+ *
+ * Displays a live clock in h:m:s format. Use
  */
 
 import React, {useEffect, useState} from "react";

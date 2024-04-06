@@ -1,3 +1,10 @@
+/**
+ * activeorder.customer.comp.jsx
+ *
+ * A card that shows an active order for a customer
+ * and contains the progress of the order.
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProgressBar from '../activeOrder/progressbar.customer.comp.jsx'

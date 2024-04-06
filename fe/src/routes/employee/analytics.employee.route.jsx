@@ -1,3 +1,10 @@
+/**
+ * analytics.employee.route.jsx
+ *
+ * Analytics page for a restaurant on the employee
+ * side of the application.
+ */
+
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../.store/ThemeContext.jsx";
 import { useNavigate } from "react-router-dom";

@@ -1,5 +1,8 @@
 /**
  * orderhistorytable.employee.comp.jsx
+ *
+ * Table inside the employee history route that displays
+ * all order history for a specific restaurant.
  */
 import {orderSort, statusSortBy} from "./orderhistoryhelpers.employee.js";
 const convertTimeFormat = (timeString) => {

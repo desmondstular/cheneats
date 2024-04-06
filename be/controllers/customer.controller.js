@@ -1,7 +1,7 @@
 /**
  * customer.controller.js
  *
- * Contains controller functions for customers.
+ * Contains controller functions for customers collection.
  */
 import {
 	createCustomerInRepo,

@@ -1,3 +1,10 @@
+/**
+ * checkoutModal.customer.comp.jsx
+ *
+ * A modal that is displayed when a customer is
+ * read to checkout an order for a specific restaurant.
+ */
+
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";

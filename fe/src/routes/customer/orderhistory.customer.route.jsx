@@ -1,3 +1,9 @@
+/**
+ * orderhistory.customer.route.jsx
+ *
+ * Order history for a customer page.
+ */
+
 import {useContext, useEffect, useState} from "react";
 import {ThemeContext} from "../../.store/ThemeContext.jsx";
 import {useNavigate} from "react-router-dom";

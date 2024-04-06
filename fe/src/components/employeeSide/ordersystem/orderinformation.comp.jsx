@@ -1,3 +1,11 @@
+/**
+ * orderinformation.comp.jsx
+ *
+ * Card/box that displays the information
+ * for an order that is selected in the
+ * employee order system page.
+ */
+
 export const OrderInformation = () => {
 	return (
 		<div

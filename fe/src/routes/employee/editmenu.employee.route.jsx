@@ -1,3 +1,10 @@
+/**
+ * Route/page for the employee side of the application
+ * where an employee is able to view menu items and
+ * edit, delete the information of all menu items
+ * for a specific restaurant.
+ */
+
 import React, {useState, useEffect, useContext} from "react";
 import axios from "axios";
 import {useParams, Link, useNavigate} from "react-router-dom";

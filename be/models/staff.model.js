@@ -1,5 +1,8 @@
 /**
  * staff.model.js
+ *
+ * A mongoose schema for a staff or employee. Links
+ * them to a specific restaurant for login.
  */
 
 import mongoose from "mongoose";

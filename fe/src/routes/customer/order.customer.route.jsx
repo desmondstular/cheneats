@@ -1,3 +1,10 @@
+/**
+ * order.customer.route.jsx
+ *
+ * Order page for on the customer side of the
+ * application.
+ */
+
 import React, {useContext, useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";

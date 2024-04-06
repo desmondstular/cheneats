@@ -1,3 +1,12 @@
+/**
+ * ordermenucard.customer.comp.jsx
+ *
+ * Shows a specific item associated with the
+ * restaurant a customer is attempting to checkout
+ * with. Can adjust quantity of items and then add
+ * them to cart.
+ */
+
 import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';

@@ -1,3 +1,10 @@
+/**
+ * cart.customer.comp.jsx
+ *
+ * Shows items inside a customers cart for a
+ * specific restaurant.
+ */
+
 import React from 'react';
 import { IconButton } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';

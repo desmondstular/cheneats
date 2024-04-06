@@ -57,6 +57,9 @@ export const addItemToOrderRepo = async (query, newItem) => {
     }
 };
 
+/**
+ * Removes a menu item from a specific order.
+ */
 export const removeItemFromOrderRepo = async (query, itemToRemove) => {
     try {
         // Find the order document by its ID
@@ -87,10 +90,6 @@ export const removeItemFromOrderRepo = async (query, itemToRemove) => {
         throw error;
     }
 };
-
-
-
-
 
 /**
  * Deletes a order from the database.
@@ -150,6 +149,11 @@ export const getOrdersByCustomerPopulated = async (query) => {
 		throw e;
 	}
 }
+
+/**
+ * Gets all orders that have the in cart status
+ * for a specific customer.
+ */
 export const getCartedOrdersByCustomerIdRepo = async (query) => {
     try {
         return await Order.find(query)

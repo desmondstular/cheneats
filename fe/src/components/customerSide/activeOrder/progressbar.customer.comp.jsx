@@ -1,3 +1,10 @@
+/**
+ * progressbar.customer.comp.jsx
+ *
+ * A progressbar of an order found inside the
+ * active order component.
+ */
+
 import React from 'react';
 import './ProgressBar.css'; // Import custom styles for ProgressBar (ProgressBar.css)
 
