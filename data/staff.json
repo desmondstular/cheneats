@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "65fa215c0ffa0761402bd982"
+  },
+  "email": "josh@gmail.com",
+  "restaurant_ref": {
+    "$oid": "65f908e8e75ba89099210778"
+  },
+  "manager": false
+},
+{
+  "_id": {
+    "$oid": "65fa215c0ffa0761402bd983"
+  },
+  "email": "jake@gmail.com",
+  "restaurant_ref": {
+    "$oid": "65f90a63e75ba89099210798"
+  },
+  "manager": false
+},
+{
+  "_id": {
+    "$oid": "65fa215c0ffa0761402bd984"
+  },
+  "email": "steve@gmail.com",
+  "restaurant_ref": {
+    "$oid": "65f90a45e75ba89099210796"
+  },
+  "manager": true
+},
+{
+  "_id": {
+    "$oid": "660dbce58311d5dee31e63cd"
+  },
+  "email": "jwood@gmail.com",
+  "restaurant_ref": {
+    "$oid": "65f908e8e75ba89099210778"
+  },
+  "manager": true,
+  "__v": 0
+}]
